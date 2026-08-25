@@ -17,6 +17,11 @@
   a:hover { color: #C9A55C; }
   ::selection { background:#C9A55C; color:#101A14; }
   @keyframes ffRise { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+  .galeria-track { scrollbar-width: thin; scrollbar-color: rgba(201,165,92,.5) transparent; }
+  .galeria-track::-webkit-scrollbar { height: 6px; }
+  .galeria-track::-webkit-scrollbar-thumb { background: rgba(201,165,92,.5); border-radius: 3px; }
+  .galeria-track.galeria-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+  .galeria-track.galeria-dragging img { pointer-events: none; }
 </style>
 </helmet>
 
@@ -306,46 +311,36 @@
           <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#C9A55C;">Galería</span>
           <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,4.6vw,62px); line-height:1.06; color:#FAF6EE;">La finca, sin filtros</h2>
         </div>
-        <span style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:rgba(250,246,238,.5);">Fotografías del lugar</span>
+        <span style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:rgba(250,246,238,.5);">Desliza o arrastra para ver más →</span>
       </div>
 
-      <div style="display:flex; flex-wrap:wrap; gap:clamp(10px,1.2vw,16px);">
-        <img src="uploads/pasted-1787633729628-0.png" alt="Novios en los jardines" onClick="{{ open0 }}" style="flex:2 1 58%; min-width:0; aspect-ratio:16/9; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633857167-0.png" alt="Capilla de la finca" onClick="{{ open1 }}" style="flex:1 1 30%; min-width:0; aspect-ratio:3/4; max-height:640px; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:clamp(10px,1.2vw,16px);">
-        <img src="uploads/pasted-1787633887449-0.png" alt="Ceremonia en la capilla" onClick="{{ open2 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633891469-0.png" alt="Interior de la capilla" onClick="{{ open3 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633877535-0.png" alt="Novios con auto clásico" onClick="{{ open4 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633787251-0.png" alt="XV años en los jardines" onClick="{{ open5 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-      </div>
-      <div style="display:flex; flex-wrap:wrap; gap:clamp(10px,1.2vw,16px);">
-        <img src="uploads/pasted-1787633828036-0.png" alt="Carpa iluminada de noche" onClick="{{ open6 }}" style="flex:2 1 58%; min-width:0; aspect-ratio:16/9; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633854380-0.png" alt="Primer baile en la pista" onClick="{{ open7 }}" style="flex:1 1 30%; min-width:0; aspect-ratio:3/4; max-height:640px; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:clamp(10px,1.2vw,16px);">
-        <img src="uploads/pasted-1787633815757-0.png" alt="Montaje de banquete en la carpa" onClick="{{ open8 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633833841-0.png" alt="Salón montado para recepción" onClick="{{ open9 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787632614590-0.png" alt="Salón principal con bóvedas" onClick="{{ open10 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633803805-0.png" alt="Mesa de dulces" onClick="{{ open11 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-      </div>
-      <div style="display:flex; flex-wrap:wrap; gap:clamp(10px,1.2vw,16px);">
-        <img src="uploads/pasted-1787633820738-0.png" alt="Alberca y villas" onClick="{{ open12 }}" style="flex:2 1 58%; min-width:0; aspect-ratio:16/9; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633842010-0.png" alt="Cascada al atardecer" onClick="{{ open13 }}" style="flex:1 1 30%; min-width:0; aspect-ratio:3/4; max-height:640px; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:clamp(10px,1.2vw,16px);">
-        <img src="uploads/pasted-1787633813311-0.png" alt="Banquete servido" onClick="{{ open14 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633793084-0.png" alt="Mesa montada" onClick="{{ open15 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633809998-0.png" alt="Mariachi en el salón" onClick="{{ open16 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787632647988-0.png" alt="Arco de piedra" onClick="{{ open17 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-      </div>
-      <div style="display:flex; flex-wrap:wrap; gap:clamp(10px,1.2vw,16px);">
-        <img src="uploads/pasted-1787633825892-0.png" alt="Vista aérea de la finca" onClick="{{ open18 }}" style="flex:2 1 58%; min-width:0; aspect-ratio:16/9; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787633797021-0.png" alt="Jardines y áreas verdes" onClick="{{ open19 }}" style="flex:1 1 30%; min-width:0; aspect-ratio:3/4; max-height:640px; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:clamp(10px,1.2vw,16px);">
-        <img src="uploads/pasted-1787632638154-0.png" alt="Villas junto a la alberca" onClick="{{ open20 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
-        <img src="uploads/pasted-1787632630576-0.png" alt="Fachada de la casa principal" onClick="{{ open21 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+      <div style="position:relative;">
+        <div id="galeria-track" class="galeria-track" style="display:flex; gap:clamp(10px,1.4vw,18px); overflow-x:auto; scroll-snap-type:x proximity; padding-bottom:10px; cursor:grab;">
+          <img src="uploads/pasted-1787633729628-0.png" alt="Novios en los jardines" onClick="{{ open0 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633857167-0.png" alt="Capilla de la finca" onClick="{{ open1 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633887449-0.png" alt="Ceremonia en la capilla" onClick="{{ open2 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633891469-0.png" alt="Interior de la capilla" onClick="{{ open3 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633877535-0.png" alt="Novios con auto clásico" onClick="{{ open4 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633787251-0.png" alt="XV años en los jardines" onClick="{{ open5 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633828036-0.png" alt="Carpa iluminada de noche" onClick="{{ open6 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633854380-0.png" alt="Primer baile en la pista" onClick="{{ open7 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633815757-0.png" alt="Montaje de banquete en la carpa" onClick="{{ open8 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633833841-0.png" alt="Salón montado para recepción" onClick="{{ open9 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787632614590-0.png" alt="Salón principal con bóvedas" onClick="{{ open10 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633803805-0.png" alt="Mesa de dulces" onClick="{{ open11 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633820738-0.png" alt="Alberca y villas" onClick="{{ open12 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633842010-0.png" alt="Cascada al atardecer" onClick="{{ open13 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633813311-0.png" alt="Banquete servido" onClick="{{ open14 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633793084-0.png" alt="Mesa montada" onClick="{{ open15 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633809998-0.png" alt="Mariachi en el salón" onClick="{{ open16 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787632647988-0.png" alt="Arco de piedra" onClick="{{ open17 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633825892-0.png" alt="Vista aérea de la finca" onClick="{{ open18 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787633797021-0.png" alt="Jardines y áreas verdes" onClick="{{ open19 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787632638154-0.png" alt="Villas junto a la alberca" onClick="{{ open20 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+          <img src="uploads/pasted-1787632630576-0.png" alt="Fachada de la casa principal" onClick="{{ open21 }}" style="flex:0 0 clamp(230px,32vw,400px); scroll-snap-align:start; aspect-ratio:4/3; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        </div>
+        <button type="button" onClick="{{ galleryPrev }}" aria-label="Ver fotos anteriores" style="position:absolute; left:-4px; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(15,26,20,.85); border:1px solid rgba(201,165,92,.4); color:#FAF6EE; font-size:20px; cursor:pointer;" style-hover="background:#C9A55C; color:#16241B;">‹</button>
+        <button type="button" onClick="{{ galleryNext }}" aria-label="Ver más fotos" style="position:absolute; right:-4px; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(15,26,20,.85); border:1px solid rgba(201,165,92,.4); color:#FAF6EE; font-size:20px; cursor:pointer;" style-hover="background:#C9A55C; color:#16241B;">›</button>
       </div>
     </div>
   </section>
@@ -514,11 +509,56 @@ class Component extends DCLogic {
     window.addEventListener('resize', this.onResize);
     window.addEventListener('keydown', this.onKey);
     this.onResize();
+    this.setupGalleryDrag();
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onResize);
     window.removeEventListener('keydown', this.onKey);
+    this.teardownGalleryDrag();
+  }
+
+  setupGalleryDrag() {
+    const track = document.getElementById('galeria-track');
+    if (!track) return;
+    this.galleryTrack = track;
+    let isDown = false, startX = 0, startScroll = 0, dragged = false;
+    this.onGalleryDown = (e) => {
+      isDown = true; dragged = false;
+      track.classList.add('galeria-dragging');
+      startX = e.pageX;
+      startScroll = track.scrollLeft;
+    };
+    this.onGalleryMove = (e) => {
+      if (!isDown) return;
+      const dx = e.pageX - startX;
+      if (Math.abs(dx) > 4) dragged = true;
+      track.scrollLeft = startScroll - dx;
+      e.preventDefault();
+    };
+    this.onGalleryUp = () => {
+      isDown = false;
+      track.classList.remove('galeria-dragging');
+    };
+    this.onGalleryClickCapture = (e) => {
+      if (dragged) { e.stopPropagation(); e.preventDefault(); }
+    };
+    track.addEventListener('mousedown', this.onGalleryDown);
+    window.addEventListener('mousemove', this.onGalleryMove);
+    window.addEventListener('mouseup', this.onGalleryUp);
+    track.addEventListener('click', this.onGalleryClickCapture, true);
+  }
+  teardownGalleryDrag() {
+    const track = this.galleryTrack;
+    if (!track) return;
+    track.removeEventListener('mousedown', this.onGalleryDown);
+    window.removeEventListener('mousemove', this.onGalleryMove);
+    window.removeEventListener('mouseup', this.onGalleryUp);
+    track.removeEventListener('click', this.onGalleryClickCapture, true);
+  }
+  scrollGallery(dir) {
+    if (!this.galleryTrack) return;
+    this.galleryTrack.scrollBy({ left: this.galleryTrack.clientWidth * 0.8 * dir, behavior: 'smooth' });
   }
 
   step(d) {
@@ -550,6 +590,8 @@ class Component extends DCLogic {
       closeLightbox: () => this.setState({ light: null }),
       prevLightbox: () => this.step(-1),
       nextLightbox: () => this.step(1),
+      galleryPrev: () => this.scrollGallery(-1),
+      galleryNext: () => this.scrollGallery(1),
       submit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
       sentMessage: sent ? 'Gracias. Te contactamos en menos de 24 horas.' : '',
       bottomInset: barOn ? 'calc(clamp(34px,5vw,64px) + 78px)' : 'clamp(34px,5vw,64px)',
