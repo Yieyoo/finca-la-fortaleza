@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin:0; padding:0; background:#0F1A14; scroll-behavior:smooth; }
+  * { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #C9A55C; }
+  ::selection { background:#C9A55C; color:#101A14; }
+  @keyframes ffRise { from { opacity:0; transform: translateY(18px); } to { opacity:1; transform:none; } }
+</style>
+</helmet>
+
+<div style="background:#FAF6EE; color:#1B2A20; font-family:'Jost',Helvetica,sans-serif; font-weight:300; overflow-x:hidden;">
+
+  <header style="position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:clamp(14px,2.2vw,26px) clamp(18px,4vw,56px); background:{{ navBg }}; backdrop-filter:blur(10px); transition:background .4s ease, box-shadow .4s ease; box-shadow:{{ navShadow }};">
+    <a href="#inicio" style="display:flex; align-items:center; gap:12px; line-height:1;">
+      <svg width="34" height="38" viewBox="0 0 40 44" aria-label="Finca La Fortaleza" style="flex:none; display:block;">
+        <rect x="4" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+        <rect x="29" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+        <rect x="13" y="14" width="14" height="26" fill="#C9A55C" />
+        <rect x="12" y="7" width="4" height="7" fill="#C9A55C" />
+        <rect x="18" y="7" width="4" height="7" fill="#C9A55C" />
+        <rect x="24" y="7" width="4" height="7" fill="#C9A55C" />
+        <rect x="18" y="30" width="4" height="10" fill="#16241B" />
+      </svg>
+      <span style="display:flex; flex-direction:column;">
+        <span style="font-family:'Cormorant Garamond',serif; font-size:clamp(16px,1.9vw,21px); letter-spacing:.16em; color:#FAF6EE; text-transform:uppercase;">Finca</span>
+        <span style="font-family:'Cormorant Garamond',serif; font-size:clamp(16px,1.9vw,21px); letter-spacing:.16em; color:#C9A55C; text-transform:uppercase;">La Fortaleza</span>
+      </span>
+    </a>
+    <nav style="display:{{ navDisplay }}; align-items:center; gap:clamp(14px,1.8vw,30px); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#F0EADD;">
+      <a href="#la-finca">La Finca</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#hospedaje">Hospedaje</a>
+      <a href="#galeria">Galería</a>
+      <a href="#instalaciones">Instalaciones</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#contacto" style="border:1px solid #C9A55C; color:#C9A55C; padding:11px 20px;" style-hover="background:#C9A55C; color:#16241B;">Cotizar</a>
+    </nav>
+    <button type="button" onClick="{{ toggleMenu }}" aria-label="Menú" style="display:{{ burgerDisplay }}; flex-direction:column; gap:6px; width:46px; height:46px; align-items:center; justify-content:center; background:transparent; border:1px solid rgba(250,246,238,.35); cursor:pointer;">
+      <span style="display:block; width:20px; height:1px; background:#FAF6EE;"></span>
+      <span style="display:block; width:20px; height:1px; background:#FAF6EE;"></span>
+    </button>
+  </header>
+
+  <div style="position:fixed; inset:0; z-index:60; background:#16241B; display:{{ menuDisplay }}; flex-direction:column; justify-content:flex-start; overflow-y:auto; padding:clamp(70px,12vw,90px) clamp(24px,7vw,44px) clamp(32px,7vw,48px); gap:2px;">
+    <button type="button" onClick="{{ toggleMenu }}" aria-label="Cerrar" style="position:absolute; top:22px; right:22px; width:46px; height:46px; background:transparent; border:1px solid rgba(250,246,238,.3); color:#FAF6EE; font-size:20px; cursor:pointer;">×</button>
+    <span style="display:flex; align-items:center; gap:10px; font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:#C9A55C; margin-bottom:14px;">
+      <svg width="24" height="27" viewBox="0 0 40 44" aria-hidden="true" style="flex:none; display:block;">
+        <rect x="4" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+        <rect x="29" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+        <rect x="13" y="14" width="14" height="26" fill="#C9A55C" />
+        <rect x="12" y="7" width="4" height="7" fill="#C9A55C" />
+        <rect x="18" y="7" width="4" height="7" fill="#C9A55C" />
+        <rect x="24" y="7" width="4" height="7" fill="#C9A55C" />
+        <rect x="18" y="30" width="4" height="10" fill="#16241B" />
+      </svg>
+      Finca La Fortaleza
+    </span>
+    <a href="#la-finca" onClick="{{ toggleMenu }}" style="font-family:'Cormorant Garamond',serif; font-size:clamp(26px,7vw,34px); color:#FAF6EE; padding:11px 0; border-bottom:1px solid rgba(250,246,238,.1);">La Finca</a>
+    <a href="#eventos" onClick="{{ toggleMenu }}" style="font-family:'Cormorant Garamond',serif; font-size:clamp(26px,7vw,34px); color:#FAF6EE; padding:11px 0; border-bottom:1px solid rgba(250,246,238,.1);">Eventos</a>
+    <a href="#hospedaje" onClick="{{ toggleMenu }}" style="font-family:'Cormorant Garamond',serif; font-size:clamp(26px,7vw,34px); color:#FAF6EE; padding:11px 0; border-bottom:1px solid rgba(250,246,238,.1);">Hospedaje</a>
+    <a href="#galeria" onClick="{{ toggleMenu }}" style="font-family:'Cormorant Garamond',serif; font-size:clamp(26px,7vw,34px); color:#FAF6EE; padding:11px 0; border-bottom:1px solid rgba(250,246,238,.1);">Galería</a>
+    <a href="#instalaciones" onClick="{{ toggleMenu }}" style="font-family:'Cormorant Garamond',serif; font-size:clamp(26px,7vw,34px); color:#FAF6EE; padding:11px 0; border-bottom:1px solid rgba(250,246,238,.1);">Instalaciones</a>
+    <a href="#ubicacion" onClick="{{ toggleMenu }}" style="font-family:'Cormorant Garamond',serif; font-size:clamp(26px,7vw,34px); color:#FAF6EE; padding:11px 0; border-bottom:1px solid rgba(250,246,238,.1);">Ubicación</a>
+    <a href="#contacto" onClick="{{ toggleMenu }}" style="font-family:'Cormorant Garamond',serif; font-size:clamp(26px,7vw,34px); color:#C9A55C; padding:11px 0;">Cotizar</a>
+    <a href="{{ waHref }}" target="_blank" rel="noopener" style="margin-top:20px; border:1px solid rgba(201,165,92,.5); color:#C9A55C; padding:15px 22px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; text-align:center;">WhatsApp</a>
+  </div>
+
+  <section id="inicio" data-screen-label="Hero" style="position:relative; min-height:100svh; display:grid; align-items:end; overflow:hidden;">
+    <img src="uploads/pasted-1787634226736-0.png" alt="Novios frente a la torre de Finca La Fortaleza" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;" />
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,26,20,.74) 0%, rgba(15,26,20,.26) 42%, rgba(15,26,20,.9) 100%);"></div>
+    <div style="position:relative; padding:clamp(28px,6vw,86px) clamp(20px,4vw,56px) {{ bottomInset }}; display:grid; gap:clamp(16px,2.2vw,28px); max-width:1120px;">
+      <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#C9A55C;">Finca La Fortaleza</span>
+      <h1 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(40px,7.6vw,108px); line-height:.96; color:#FAF6EE; letter-spacing:-.01em; text-wrap:balance;">Un lugar para celebrar<br /><em style="font-style:italic; color:#E9DCC0;">momentos extraordinarios</em></h1>
+      <p style="margin:0; font-size:clamp(12px,1.2vw,14px); letter-spacing:.26em; text-transform:uppercase; color:rgba(250,246,238,.78);">Bodas · Eventos · Hospedaje</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-top:6px;">
+        <a href="#contacto" style="background:#C9A55C; color:#16241B; padding:17px 32px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; min-height:46px; display:inline-flex; align-items:center;" style-hover="background:#E9DCC0;">Solicitar cotización</a>
+        <a href="#la-finca" style="border:1px solid rgba(250,246,238,.45); color:#FAF6EE; padding:17px 30px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; min-height:46px; display:inline-flex; align-items:center;" style-hover="border-color:#C9A55C;">Explorar la finca</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="la-finca" data-screen-label="La Finca" style="background:#FAF6EE; padding:clamp(64px,9vw,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(32px,5vw,80px); align-items:center;">
+      <div style="display:grid; gap:22px;">
+        <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#9A7B3E;">La Finca</span>
+        <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,4.6vw,62px); line-height:1.06; color:#1B2A20;">Piedra, cantera y campo abierto</h2>
+        <p style="margin:0; font-size:clamp(15px,1.3vw,18px); line-height:1.8; color:#4A5A4E; max-width:46ch;">La propiedad se organiza alrededor de la casa principal: una escalinata de piedra al frente, arcos de cantera que enmarcan los jardines y la torre que da nombre al lugar. Desde el interior, los ventanales de herrería abren hacia el campo.</p>
+        <p style="margin:0; font-size:clamp(15px,1.3vw,18px); line-height:1.8; color:#4A5A4E; max-width:46ch;">Jardines, salones, capilla, alberca, terraza, mirador, áreas verdes y villas para hospedaje conviven dentro de la misma finca, a unos pasos entre sí.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:24px; margin-top:10px; border-top:1px solid rgba(27,42,32,.16); padding-top:26px;">
+          <div style="display:grid; gap:8px;"><span style="font-family:'Cormorant Garamond',serif; font-size:28px; color:#1B2A20;">Arquitectura</span><span style="font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:#8A9A8C;">Cantera y herrería</span></div>
+          <div style="display:grid; gap:8px;"><span style="font-family:'Cormorant Garamond',serif; font-size:28px; color:#1B2A20;">Naturaleza</span><span style="font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:#8A9A8C;">Áreas verdes y arroyo</span></div>
+          <div style="display:grid; gap:8px;"><span style="font-family:'Cormorant Garamond',serif; font-size:28px; color:#1B2A20;">Privacidad</span><span style="font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:#8A9A8C;">Propiedad completa</span></div>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <img src="uploads/pasted-1787632630576-0.png" alt="Fachada principal y escalinata de la casa" style="width:100%; height:100%; min-height:230px; object-fit:cover; grid-column:span 2;" />
+        <img src="uploads/pasted-1787632647988-0.png" alt="Arco de piedra hacia los jardines" style="width:100%; aspect-ratio:1/1; object-fit:cover;" />
+        <img src="uploads/pasted-1787632634290-0.png" alt="La torre de la finca" style="width:100%; aspect-ratio:1/1; object-fit:cover;" />
+      </div>
+    </div>
+  </section>
+
+  <section id="todo" data-screen-label="Todo en un mismo lugar" style="position:relative; padding:clamp(64px,9vw,150px) clamp(20px,4vw,56px); background:#16241B; overflow:hidden;">
+    <img src="uploads/pasted-1787632619596-0.png" alt="Vista aérea de la finca" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.22;" />
+    <div style="position:relative; max-width:1240px; margin:0 auto; display:grid; gap:clamp(36px,5vw,66px);">
+      <div style="display:grid; gap:20px; max-width:640px;">
+        <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#C9A55C;">Todo en un mismo lugar</span>
+        <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,4.8vw,64px); line-height:1.06; color:#FAF6EE;">Un evento completo sin salir de la propiedad</h2>
+        <p style="margin:0; font-size:clamp(15px,1.3vw,18px); line-height:1.8; color:rgba(250,246,238,.76);">Desde la ceremonia hasta el último momento de la celebración, cada parte del día ocurre dentro de Finca La Fortaleza. Sin traslados para tus invitados.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:1px; background:rgba(250,246,238,.16);">
+        <div style="background:#16241B; padding:clamp(24px,2.6vw,36px); display:grid; gap:12px; align-content:start;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:34px; color:#C9A55C;">01</span>
+          <h3 style="margin:0; font-size:13px; letter-spacing:.24em; text-transform:uppercase; color:#FAF6EE;">Ceremonia</h3>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:rgba(250,246,238,.68);">Capilla o jardines, al aire libre.</p>
+        </div>
+        <div style="background:#16241B; padding:clamp(24px,2.6vw,36px); display:grid; gap:12px; align-content:start;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:34px; color:#C9A55C;">02</span>
+          <h3 style="margin:0; font-size:13px; letter-spacing:.24em; text-transform:uppercase; color:#FAF6EE;">Recepción</h3>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:rgba(250,246,238,.68);">Salones, terraza o carpa.</p>
+        </div>
+        <div style="background:#16241B; padding:clamp(24px,2.6vw,36px); display:grid; gap:12px; align-content:start;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:34px; color:#C9A55C;">03</span>
+          <h3 style="margin:0; font-size:13px; letter-spacing:.24em; text-transform:uppercase; color:#FAF6EE;">Celebración</h3>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:rgba(250,246,238,.68);">Pista de baile, jardines y áreas sociales.</p>
+        </div>
+        <div style="background:#16241B; padding:clamp(24px,2.6vw,36px); display:grid; gap:12px; align-content:start;">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:34px; color:#C9A55C;">04</span>
+          <h3 style="margin:0; font-size:13px; letter-spacing:.24em; text-transform:uppercase; color:#FAF6EE;">Hospedaje</h3>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:rgba(250,246,238,.68);">Villas dentro de la propiedad.</p>
+        </div>
+      </div>
+      <a href="#contacto" style="justify-self:start; background:#C9A55C; color:#16241B; padding:17px 32px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; min-height:46px; display:inline-flex; align-items:center;" style-hover="background:#E9DCC0;">Solicitar cotización</a>
+    </div>
+  </section>
+
+  <section id="eventos" data-screen-label="Eventos" style="background:#FAF6EE; padding:clamp(64px,9vw,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1240px; margin:0 auto; display:grid; gap:clamp(34px,4.5vw,64px);">
+      <div style="display:grid; gap:20px; max-width:620px;">
+        <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#9A7B3E;">Eventos</span>
+        <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,4.6vw,62px); line-height:1.06; color:#1B2A20;">Espacios interiores y exteriores para cada celebración</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:clamp(14px,1.8vw,24px);">
+        <article style="position:relative; min-height:clamp(300px,34vw,430px); display:grid; align-items:end; overflow:hidden;">
+          <img src="uploads/pasted-1787633729628-0.png" alt="Boda en Finca La Fortaleza" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,26,20,0) 38%, rgba(15,26,20,.88) 100%);"></div>
+          <div style="position:relative; padding:24px; display:grid; gap:8px;">
+            <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:30px; color:#FAF6EE;">Bodas</h3>
+            <p style="margin:0; font-size:14px; line-height:1.7; color:rgba(250,246,238,.78);">Ceremonia, recepción, fiesta y hospedaje en un mismo lugar.</p>
+          </div>
+        </article>
+        <article style="position:relative; min-height:clamp(300px,34vw,430px); display:grid; align-items:end; overflow:hidden;">
+          <img src="uploads/pasted-1787633787251-0.png" alt="Celebración de XV años en la finca" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,26,20,0) 38%, rgba(15,26,20,.88) 100%);"></div>
+          <div style="position:relative; padding:24px; display:grid; gap:8px;">
+            <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:30px; color:#FAF6EE;">XV años</h3>
+            <p style="margin:0; font-size:14px; line-height:1.7; color:rgba(250,246,238,.78);">Escalinata, jardines y salón para la noche completa.</p>
+          </div>
+        </article>
+        <article style="position:relative; min-height:clamp(300px,34vw,430px); display:grid; align-items:end; overflow:hidden;">
+          <img src="uploads/pasted-1787633809998-0.png" alt="Fiesta con mariachi en la finca" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,26,20,0) 38%, rgba(15,26,20,.88) 100%);"></div>
+          <div style="position:relative; padding:24px; display:grid; gap:8px;">
+            <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:30px; color:#FAF6EE;">Eventos sociales</h3>
+            <p style="margin:0; font-size:14px; line-height:1.7; color:rgba(250,246,238,.78);">Aniversarios, bautizos y celebraciones familiares.</p>
+          </div>
+        </article>
+        <article style="position:relative; min-height:clamp(300px,34vw,430px); display:grid; align-items:end; overflow:hidden;">
+          <img src="uploads/pasted-1787633831342-0.png" alt="Salas lounge montadas para un evento" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,26,20,0) 38%, rgba(15,26,20,.88) 100%);"></div>
+          <div style="position:relative; padding:24px; display:grid; gap:8px;">
+            <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:30px; color:#FAF6EE;">Eventos empresariales</h3>
+            <p style="margin:0; font-size:14px; line-height:1.7; color:rgba(250,246,238,.78);">Reuniones y convivencias con espacios abiertos.</p>
+          </div>
+        </article>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:18px; border-top:1px solid rgba(27,42,32,.16); padding-top:clamp(24px,3vw,40px);">
+        <p style="margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(21px,2.3vw,30px); color:#1B2A20; max-width:34ch;">Cada evento se cotiza según fecha, espacios y número de invitados.</p>
+        <a href="{{ waHref }}" target="_blank" rel="noopener" style="border:1px solid #1B2A20; color:#1B2A20; padding:16px 28px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; min-height:46px; display:inline-flex; align-items:center;" style-hover="background:#1B2A20; color:#FAF6EE;">Escríbenos por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="instalaciones" data-screen-label="Instalaciones" style="background:#EFE7D7; padding:clamp(64px,9vw,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1240px; margin:0 auto; display:grid; gap:clamp(32px,4vw,58px);">
+      <div style="display:grid; gap:18px; max-width:620px;">
+        <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#9A7B3E;">Instalaciones</span>
+        <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,4.6vw,62px); line-height:1.06; color:#1B2A20;">Los espacios de la finca</h2>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:clamp(14px,1.8vw,22px);">
+        <article style="display:grid; gap:14px; align-content:start;">
+          <img src="uploads/pasted-1787632647988-0.png" alt="Jardines vistos desde un arco de piedra" style="width:100%; aspect-ratio:4/3; object-fit:cover;" />
+          <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Jardines</h3>
+          <p style="margin:0; font-size:15px; line-height:1.75; color:#4A5A4E;">Ceremonias y celebraciones al aire libre entre áreas verdes y arcos de piedra.</p>
+        </article>
+        <article style="display:grid; gap:14px; align-content:start;">
+          <img src="uploads/pasted-1787632614590-0.png" alt="Salón principal con bóvedas y ventanales" style="width:100%; aspect-ratio:4/3; object-fit:cover;" />
+          <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Salones</h3>
+          <p style="margin:0; font-size:15px; line-height:1.75; color:#4A5A4E;">Espacios techados para recepción y celebración, con pista de baile.</p>
+        </article>
+        <article style="display:grid; gap:14px; align-content:start;">
+          <img src="uploads/pasted-1787632638154-0.png" alt="Alberca de la finca" style="width:100%; aspect-ratio:4/3; object-fit:cover;" />
+          <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Alberca</h3>
+          <p style="margin:0; font-size:15px; line-height:1.75; color:#4A5A4E;">Patio exterior con alberca, rodeado por los corredores de las villas.</p>
+        </article>
+        <article style="display:grid; gap:14px; align-content:start;">
+          <img src="uploads/pasted-1787632655759-0.png" alt="Terraza y acceso al salón" style="width:100%; aspect-ratio:4/3; object-fit:cover;" />
+          <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Terraza</h3>
+          <p style="margin:0; font-size:15px; line-height:1.75; color:#4A5A4E;">Área exterior contigua al salón, con vista a los jardines.</p>
+        </article>
+        <article style="display:grid; gap:14px; align-content:start;">
+          <img src="uploads/pasted-1787633857167-0.png" alt="Capilla de la finca" style="width:100%; aspect-ratio:4/3; object-fit:cover;" />
+          <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Capilla</h3>
+          <p style="margin:0; font-size:15px; line-height:1.75; color:#4A5A4E;">Un espacio dentro de la finca para la ceremonia religiosa.</p>
+        </article>
+        <article style="display:grid; gap:14px; align-content:start;">
+          <img src="uploads/pasted-1787633842010-0.png" alt="Cascada y arroyo de la finca al atardecer" style="width:100%; aspect-ratio:4/3; object-fit:cover;" />
+          <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Mirador, arroyo y cascada</h3>
+          <p style="margin:0; font-size:15px; line-height:1.75; color:#4A5A4E;">Áreas naturales dentro de la propiedad para recorrer y fotografiar.</p>
+        </article>
+        <article style="display:grid; gap:14px; align-content:start;">
+          <img src="uploads/pasted-1787633828036-0.png" alt="Carpa iluminada junto al arroyo" style="width:100%; aspect-ratio:4/3; object-fit:cover;" />
+          <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Carpa</h3>
+          <p style="margin:0; font-size:15px; line-height:1.75; color:#4A5A4E;">Montaje al aire libre junto al agua, con espacio para banquete y salas lounge.</p>
+        </article>
+        <article style="display:grid; gap:14px; align-content:start;">
+          <img src="uploads/pasted-1787633854380-0.png" alt="Pista de baile en la carpa" style="width:100%; aspect-ratio:4/3; object-fit:cover;" />
+          <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Pista de baile</h3>
+          <p style="margin:0; font-size:15px; line-height:1.75; color:#4A5A4E;">Pista central para el primer baile y el resto de la noche.</p>
+        </article>
+      </div>
+
+      <div style="display:grid; gap:18px; border-top:1px solid rgba(27,42,32,.18); padding-top:clamp(24px,3vw,40px);">
+        <span style="font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#9A7B3E;">También en la finca</span>
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+          <span style="border:1px solid rgba(27,42,32,.25); padding:10px 16px; font-size:13px; letter-spacing:.08em; color:#1B2A20;">Cocina propia</span>
+          <span style="border:1px solid rgba(27,42,32,.25); padding:10px 16px; font-size:13px; letter-spacing:.08em; color:#1B2A20;">Áreas verdes</span>
+          <span style="border:1px solid rgba(27,42,32,.25); padding:10px 16px; font-size:13px; letter-spacing:.08em; color:#1B2A20;">Estacionamiento</span>
+          <span style="border:1px solid rgba(27,42,32,.25); padding:10px 16px; font-size:13px; letter-spacing:.08em; color:#1B2A20;">Villas para hospedaje</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gastronomia" data-screen-label="Gastronomía" style="background:#0F1A14; padding:clamp(64px,9vw,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:clamp(30px,4.5vw,72px); align-items:center;">
+      <div style="display:grid; gap:22px;">
+        <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#C9A55C;">Gastronomía</span>
+        <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(32px,4.4vw,58px); line-height:1.08; color:#FAF6EE;">La celebración también se disfruta en la mesa</h2>
+        <p style="margin:0; font-size:clamp(15px,1.3vw,18px); line-height:1.8; color:rgba(250,246,238,.74); max-width:44ch;">La finca cuenta con cocina propia y servicio de banquete. El menú se define contigo según el tipo de evento y las necesidades de tus invitados.</p>
+        <div style="display:grid; gap:0; border-top:1px solid rgba(250,246,238,.16); max-width:460px;">
+          <div style="padding:15px 0; border-bottom:1px solid rgba(250,246,238,.16); font-size:16px; color:#FAF6EE;">Cocina tradicional y regional</div>
+          <div style="padding:15px 0; border-bottom:1px solid rgba(250,246,238,.16); font-size:16px; color:#FAF6EE;">Cocina internacional</div>
+          <div style="padding:15px 0; border-bottom:1px solid rgba(250,246,238,.16); font-size:16px; color:#FAF6EE;">Cocina fusión</div>
+          <div style="padding:15px 0; border-bottom:1px solid rgba(250,246,238,.16); font-size:16px; color:#FAF6EE;">Cocina de autor</div>
+        </div>
+        <p style="margin:0; font-size:13px; line-height:1.7; color:rgba(250,246,238,.5);">Opciones disponibles según el evento y el paquete contratado. Consulta alternativas para necesidades alimentarias específicas.</p>
+      </div>
+      <div style="display:grid; gap:14px;">
+        <img src="uploads/pasted-1787633813311-0.png" alt="Platos de ensalada listos para el banquete" style="width:100%; aspect-ratio:3/2; object-fit:cover;" />
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <img src="uploads/pasted-1787633793084-0.png" alt="Mesa montada con centro de mesa" style="width:100%; aspect-ratio:1/1; object-fit:cover;" />
+          <img src="uploads/pasted-1787633837336-0.png" alt="Montaje de mesa con vajilla dorada" style="width:100%; aspect-ratio:1/1; object-fit:cover;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hospedaje" data-screen-label="Hospedaje" style="background:#EFE7D7; padding:clamp(64px,9vw,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(30px,5vw,72px); align-items:center;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <img src="uploads/pasted-1787633820738-0.png" alt="Alberca y villas de la finca" style="width:100%; aspect-ratio:3/2; object-fit:cover; grid-column:span 2;" />
+        <img src="uploads/pasted-1787632638154-0.png" alt="Corredores de las villas junto a la alberca" style="width:100%; aspect-ratio:1/1; object-fit:cover;" />
+        <img src="uploads/pasted-1787632651402-0.png" alt="Patio de la alberca desde un arco de piedra" style="width:100%; aspect-ratio:1/1; object-fit:cover;" />
+      </div>
+      <div style="display:grid; gap:22px;">
+        <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#9A7B3E;">Hospedaje</span>
+        <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,4.8vw,64px); line-height:1.04; color:#1B2A20;">Quédate donde celebras</h2>
+        <p style="margin:0; font-size:clamp(15px,1.3vw,18px); line-height:1.8; color:#4A5A4E; max-width:44ch;">Las villas están dentro de la propiedad, alrededor del patio de la alberca y con acceso directo al jardín. Una ventaja para los invitados que llegan de otras ciudades: la fiesta termina y ya están en casa.</p>
+        <p style="margin:0; font-size:14px; line-height:1.7; color:#6B7A6C; max-width:44ch;">Disponibilidad y capacidad de hospedaje se confirman según la fecha y el tamaño del evento.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px;">
+          <a href="#contacto" style="background:#16241B; color:#FAF6EE; padding:16px 28px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; min-height:46px; display:inline-flex; align-items:center;" style-hover="background:#C9A55C; color:#16241B;">Conocer hospedaje</a>
+          <a href="{{ waHref }}" target="_blank" rel="noopener" style="border:1px solid #1B2A20; color:#1B2A20; padding:16px 28px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; min-height:46px; display:inline-flex; align-items:center;" style-hover="background:#1B2A20; color:#FAF6EE;">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria" data-screen-label="Galería" style="background:#0F1A14; padding:clamp(64px,9vw,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1300px; margin:0 auto; display:grid; gap:clamp(28px,3.6vw,50px);">
+      <div style="display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:20px;">
+        <div style="display:grid; gap:18px;">
+          <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#C9A55C;">Galería</span>
+          <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,4.6vw,62px); line-height:1.06; color:#FAF6EE;">La finca, sin filtros</h2>
+        </div>
+        <span style="font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:rgba(250,246,238,.5);">Fotografías del lugar</span>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:clamp(10px,1.2vw,16px);">
+        <img src="uploads/pasted-1787633729628-0.png" alt="Novios en los jardines" onClick="{{ open0 }}" style="flex:2 1 58%; min-width:0; aspect-ratio:16/9; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633857167-0.png" alt="Capilla de la finca" onClick="{{ open1 }}" style="flex:1 1 30%; min-width:0; aspect-ratio:3/4; max-height:640px; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:clamp(10px,1.2vw,16px);">
+        <img src="uploads/pasted-1787633887449-0.png" alt="Ceremonia en la capilla" onClick="{{ open2 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633891469-0.png" alt="Interior de la capilla" onClick="{{ open3 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633877535-0.png" alt="Novios con auto clásico" onClick="{{ open4 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633787251-0.png" alt="XV años en los jardines" onClick="{{ open5 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:clamp(10px,1.2vw,16px);">
+        <img src="uploads/pasted-1787633828036-0.png" alt="Carpa iluminada de noche" onClick="{{ open6 }}" style="flex:2 1 58%; min-width:0; aspect-ratio:16/9; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633854380-0.png" alt="Primer baile en la pista" onClick="{{ open7 }}" style="flex:1 1 30%; min-width:0; aspect-ratio:3/4; max-height:640px; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:clamp(10px,1.2vw,16px);">
+        <img src="uploads/pasted-1787633815757-0.png" alt="Montaje de banquete en la carpa" onClick="{{ open8 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633833841-0.png" alt="Salón montado para recepción" onClick="{{ open9 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787632614590-0.png" alt="Salón principal con bóvedas" onClick="{{ open10 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633803805-0.png" alt="Mesa de dulces" onClick="{{ open11 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:clamp(10px,1.2vw,16px);">
+        <img src="uploads/pasted-1787633820738-0.png" alt="Alberca y villas" onClick="{{ open12 }}" style="flex:2 1 58%; min-width:0; aspect-ratio:16/9; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633842010-0.png" alt="Cascada al atardecer" onClick="{{ open13 }}" style="flex:1 1 30%; min-width:0; aspect-ratio:3/4; max-height:640px; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:clamp(10px,1.2vw,16px);">
+        <img src="uploads/pasted-1787633813311-0.png" alt="Banquete servido" onClick="{{ open14 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633793084-0.png" alt="Mesa montada" onClick="{{ open15 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633809998-0.png" alt="Mariachi en el salón" onClick="{{ open16 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787632647988-0.png" alt="Arco de piedra" onClick="{{ open17 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:clamp(10px,1.2vw,16px);">
+        <img src="uploads/pasted-1787633825892-0.png" alt="Vista aérea de la finca" onClick="{{ open18 }}" style="flex:2 1 58%; min-width:0; aspect-ratio:16/9; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787633797021-0.png" alt="Jardines y áreas verdes" onClick="{{ open19 }}" style="flex:1 1 30%; min-width:0; aspect-ratio:3/4; max-height:640px; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:clamp(10px,1.2vw,16px);">
+        <img src="uploads/pasted-1787632638154-0.png" alt="Villas junto a la alberca" onClick="{{ open20 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+        <img src="uploads/pasted-1787632630576-0.png" alt="Fachada de la casa principal" onClick="{{ open21 }}" style="width:100%; aspect-ratio:1/1; object-fit:cover; cursor:zoom-in; transition:opacity .4s ease;" style-hover="opacity:.84;" />
+      </div>
+    </div>
+  </section>
+
+  <div style="display:{{ lightboxDisplay }}; position:fixed; inset:0; z-index:70; background:rgba(9,15,12,.96); align-items:center; justify-content:center; padding:clamp(14px,4vw,56px);">
+    <sc-if value="{{ hasLightbox }}" hint-placeholder-val="{{ false }}">
+      <img src="{{ lightboxSrc }}" alt="Fotografía de Finca La Fortaleza" style="max-width:100%; max-height:84vh; object-fit:contain;" />
+    </sc-if>
+    <button type="button" onClick="{{ closeLightbox }}" aria-label="Cerrar" style="position:absolute; top:18px; right:18px; width:48px; height:48px; background:transparent; border:1px solid rgba(250,246,238,.3); color:#FAF6EE; font-size:20px; cursor:pointer;">×</button>
+    <button type="button" onClick="{{ prevLightbox }}" aria-label="Anterior" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); width:52px; height:52px; background:rgba(9,15,12,.5); border:1px solid rgba(250,246,238,.28); color:#FAF6EE; font-size:20px; cursor:pointer;">‹</button>
+    <button type="button" onClick="{{ nextLightbox }}" aria-label="Siguiente" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); width:52px; height:52px; background:rgba(9,15,12,.5); border:1px solid rgba(250,246,238,.28); color:#FAF6EE; font-size:20px; cursor:pointer;">›</button>
+    <span style="position:absolute; bottom:22px; left:0; right:0; text-align:center; font-size:12px; letter-spacing:.2em; color:rgba(250,246,238,.6);">{{ lightboxCount }}</span>
+  </div>
+
+  <section id="video" data-screen-label="Video" style="background:#16241B; padding:clamp(56px,8vw,130px) clamp(20px,4vw,56px);">
+    <div style="max-width:1100px; margin:0 auto; display:grid; gap:26px; justify-items:center; text-align:center;">
+      <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#C9A55C;">Video</span>
+      <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(30px,4vw,54px); line-height:1.08; color:#FAF6EE;">Un recorrido por la finca</h2>
+      <div style="width:100%; aspect-ratio:16/9; background-color:#0F1A14; background-image:repeating-linear-gradient(135deg, rgba(250,246,238,.05) 0 10px, transparent 10px 20px); border:1px solid rgba(201,165,92,.3); display:grid; place-items:center; padding:20px;">
+        <span style="font-family:ui-monospace,'SFMono-Regular',Menlo,monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:rgba(250,246,238,.55); text-align:center;">espacio reservado para el video de la finca<br />(mp4 o enlace de YouTube)</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion" data-screen-label="Ubicación" style="background:#FAF6EE; padding:clamp(64px,9vw,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:clamp(28px,4vw,64px); align-items:center;">
+      <div style="display:grid; gap:22px;">
+        <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#9A7B3E;">Ubicación</span>
+        <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,4.6vw,62px); line-height:1.06; color:#1B2A20;">Santa María Cuevas,<br />Zumpango</h2>
+        <p style="margin:0; font-size:clamp(15px,1.3vw,18px); line-height:1.8; color:#4A5A4E; max-width:44ch;">Finca La Fortaleza se encuentra en Santa María Cuevas, Zumpango, Estado de México, con acceso propio y estacionamiento dentro de la propiedad.</p>
+        <p style="margin:0; font-size:14px; line-height:1.7; color:#6B7A6C; max-width:44ch;">Dirección exacta y referencias de llegada: por confirmar.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px;">
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Santa+Mar%C3%ADa+Cuevas+Zumpango+Estado+de+M%C3%A9xico" target="_blank" rel="noopener" style="background:#16241B; color:#FAF6EE; padding:16px 28px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; min-height:46px; display:inline-flex; align-items:center;" style-hover="background:#C9A55C; color:#16241B;">Cómo llegar</a>
+          <a href="{{ waHref }}" target="_blank" rel="noopener" style="border:1px solid #1B2A20; color:#1B2A20; padding:16px 28px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; min-height:46px; display:inline-flex; align-items:center;" style-hover="background:#1B2A20; color:#FAF6EE;">WhatsApp</a>
+        </div>
+      </div>
+      <div style="display:grid; gap:0; border:1px solid rgba(27,42,32,.2);">
+        <iframe title="Mapa de Santa María Cuevas, Zumpango" src="https://www.openstreetmap.org/export/embed.html?bbox=-99.19%2C19.79%2C-99.05%2C19.87&amp;layer=mapnik" style="width:100%; height:clamp(280px,38vw,420px); border:none; filter:saturate(.7);"></iframe>
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:16px 18px; background:#EFE7D7; font-size:13px; letter-spacing:.06em; color:#4A5A4E;">
+          <span>Zumpango, Estado de México</span>
+          <span style="color:#9A7B3E;">Visitas con cita previa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" data-screen-label="Contacto" style="background:#16241B; padding:clamp(64px,9vw,150px) clamp(20px,4vw,56px);">
+    <div style="max-width:1100px; margin:0 auto; display:grid; gap:clamp(30px,4vw,54px);">
+      <div style="display:grid; gap:18px; max-width:660px;">
+        <span style="font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#C9A55C;">Contacto</span>
+        <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(34px,5vw,68px); line-height:1.04; color:#FAF6EE;">Haz de tu celebración algo inolvidable</h2>
+        <p style="margin:0; font-size:clamp(15px,1.3vw,18px); line-height:1.8; color:rgba(250,246,238,.74);">Cuéntanos la fecha y el tipo de evento. Te enviamos disponibilidad y una cotización personalizada.</p>
+      </div>
+      <form onSubmit="{{ submit }}" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:clamp(16px,2vw,26px);">
+        <label style="display:grid; gap:9px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.55);">Nombre
+          <input type="text" placeholder="Tu nombre" style="border:none; border-bottom:1px solid rgba(250,246,238,.3); background:transparent; padding:14px 0; font-family:'Jost',sans-serif; font-size:16px; color:#FAF6EE; min-height:46px;" />
+        </label>
+        <label style="display:grid; gap:9px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.55);">Teléfono
+          <input type="tel" placeholder="10 dígitos" style="border:none; border-bottom:1px solid rgba(250,246,238,.3); background:transparent; padding:14px 0; font-family:'Jost',sans-serif; font-size:16px; color:#FAF6EE; min-height:46px;" />
+        </label>
+        <label style="display:grid; gap:9px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.55);">Correo
+          <input type="email" placeholder="tu@correo.com" style="border:none; border-bottom:1px solid rgba(250,246,238,.3); background:transparent; padding:14px 0; font-family:'Jost',sans-serif; font-size:16px; color:#FAF6EE; min-height:46px;" />
+        </label>
+        <label style="display:grid; gap:9px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.55);">Tipo de evento
+          <select style="border:none; border-bottom:1px solid rgba(250,246,238,.3); background:transparent; padding:14px 0; font-family:'Jost',sans-serif; font-size:16px; color:#FAF6EE; min-height:46px;">
+            <option style="color:#1B2A20;">Boda</option>
+            <option style="color:#1B2A20;">XV años</option>
+            <option style="color:#1B2A20;">Evento social</option>
+            <option style="color:#1B2A20;">Evento empresarial</option>
+            <option style="color:#1B2A20;">Solo hospedaje</option>
+          </select>
+        </label>
+        <label style="display:grid; gap:9px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.55);">Fecha del evento
+          <input type="date" style="border:none; border-bottom:1px solid rgba(250,246,238,.3); background:transparent; padding:14px 0; font-family:'Jost',sans-serif; font-size:16px; color:#FAF6EE; min-height:46px;" />
+        </label>
+        <label style="display:grid; gap:9px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.55);">Número de invitados
+          <input type="number" min="1" placeholder="Aproximado" style="border:none; border-bottom:1px solid rgba(250,246,238,.3); background:transparent; padding:14px 0; font-family:'Jost',sans-serif; font-size:16px; color:#FAF6EE; min-height:46px;" />
+        </label>
+        <label style="display:grid; gap:9px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.55); grid-column:1/-1;">Mensaje
+          <textarea rows="3" placeholder="Cuéntanos qué necesitas: espacios, hospedaje, banquete…" style="border:none; border-bottom:1px solid rgba(250,246,238,.3); background:transparent; padding:14px 0; font-family:'Jost',sans-serif; font-size:16px; color:#FAF6EE; resize:vertical;"></textarea>
+        </label>
+        <div style="grid-column:1/-1; display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
+          <button type="submit" style="background:#C9A55C; color:#16241B; border:none; padding:18px 34px; font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="background:#E9DCC0;">Solicitar cotización</button>
+          <a href="{{ waHref }}" target="_blank" rel="noopener" style="border:1px solid rgba(250,246,238,.4); color:#FAF6EE; padding:17px 30px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; min-height:46px; display:inline-flex; align-items:center;" style-hover="border-color:#C9A55C;">Cotizar por WhatsApp</a>
+          <span style="font-size:14px; color:#C9A55C;">{{ sentMessage }}</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer style="background:#0F1A14; color:rgba(250,246,238,.62); padding-top:clamp(46px,6vw,84px); padding-left:clamp(20px,4vw,56px); padding-right:clamp(20px,4vw,56px); padding-bottom:{{ footerInset }};">
+    <div style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:36px; align-items:start;">
+      <div style="display:grid; gap:10px; justify-items:start;">
+        <svg width="52" height="58" viewBox="0 0 40 44" aria-label="Finca La Fortaleza" style="display:block; margin-bottom:4px;">
+          <rect x="4" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+          <rect x="29" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+          <rect x="13" y="14" width="14" height="26" fill="#C9A55C" />
+          <rect x="12" y="7" width="4" height="7" fill="#C9A55C" />
+          <rect x="18" y="7" width="4" height="7" fill="#C9A55C" />
+          <rect x="24" y="7" width="4" height="7" fill="#C9A55C" />
+          <rect x="18" y="30" width="4" height="10" fill="#0F1A14" />
+        </svg>
+        <span style="font-family:'Cormorant Garamond',serif; font-size:22px; letter-spacing:.16em; text-transform:uppercase; color:#FAF6EE;">Finca</span>
+        <span style="font-family:'Cormorant Garamond',serif; font-size:22px; letter-spacing:.16em; text-transform:uppercase; color:#C9A55C;">La Fortaleza</span>
+        <p style="margin:8px 0 0; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; line-height:1.5; color:rgba(250,246,238,.7); max-width:26ch;">Un lugar para celebrar momentos extraordinarios.</p>
+      </div>
+      <div style="display:grid; gap:10px; font-size:14px;">
+        <a href="#la-finca">La Finca</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#hospedaje">Hospedaje</a>
+        <a href="#galeria">Galería</a>
+      </div>
+      <div style="display:grid; gap:10px; font-size:14px;">
+        <a href="#instalaciones">Instalaciones</a>
+        <a href="#ubicacion">Ubicación</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div style="display:grid; gap:12px; font-size:14px;">
+        <span style="font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#C9A55C;">Redes</span>
+        <a href="#" style="color:rgba(250,246,238,.62);">Facebook <span style="color:rgba(250,246,238,.32);">(por confirmar)</span></a>
+        <a href="#" style="color:rgba(250,246,238,.62);">Instagram <span style="color:rgba(250,246,238,.32);">(por confirmar)</span></a>
+        <a href="{{ waHref }}" target="_blank" rel="noopener" style="color:rgba(250,246,238,.62);">WhatsApp</a>
+      </div>
+      <div style="display:grid; gap:12px; font-size:14px;">
+        <span style="font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#C9A55C;">Contacto</span>
+        <span>Santa María Cuevas, Zumpango<br />Estado de México</span>
+        <span style="color:rgba(250,246,238,.4);">Teléfono y correo por confirmar</span>
+      </div>
+    </div>
+    <div style="max-width:1240px; margin:clamp(32px,4vw,54px) auto 0; border-top:1px solid rgba(250,246,238,.12); padding-top:20px; font-size:12px; letter-spacing:.1em; color:rgba(250,246,238,.35);">© 2026 Finca La Fortaleza</div>
+  </footer>
+
+  <a href="{{ waHref }}" target="_blank" rel="noopener" aria-label="WhatsApp" style="display:{{ floatDisplay }}; position:fixed; right:clamp(16px,2.4vw,30px); bottom:{{ floatBottom }}; z-index:48; width:56px; height:56px; border-radius:50%; background:#16241B; border:1px solid rgba(201,165,92,.55); color:#C9A55C; align-items:center; justify-content:center; font-size:11px; letter-spacing:.06em; box-shadow:0 10px 30px rgba(9,15,12,.45);" style-hover="background:#C9A55C; color:#16241B;">WA</a>
+
+  <div style="display:{{ quoteBarDisplay }}; position:fixed; left:0; right:0; bottom:0; z-index:45; background:#16241B; border-top:1px solid rgba(201,165,92,.45); padding:12px 16px; align-items:center; justify-content:space-between; gap:12px;">
+    <span style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#FAF6EE;">¿Tu fecha está libre?</span>
+    <a href="#contacto" style="background:#C9A55C; color:#16241B; padding:13px 20px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; min-height:44px; display:inline-flex; align-items:center;">Cotizar</a>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C9A55C&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#C9A55C&quot;,&quot;#B08A4A&quot;,&quot;#E9DCC0&quot;],&quot;section&quot;:&quot;Estilo&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;showQuoteBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conversión&quot;},&quot;showFloatingWhatsapp&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conversión&quot;}}">
+const GALLERY = [
+  '1787633729628', '1787633857167', '1787633887449', '1787633891469', '1787633877535', '1787633787251', '1787633828036', '1787633854380', '1787633815757', '1787633833841', '1787632614590', '1787633803805', '1787633820738', '1787633842010', '1787633813311', '1787633793084', '1787633809998', '1787632647988', '1787633825892', '1787633797021', '1787632638154', '1787632630576'
+].map(n => 'uploads/pasted-' + n + '-0.png');
+
+class Component extends DCLogic {
+  state = { menu: false, scrolled: false, light: null, sent: false, mobile: false };
+
+  componentDidMount() {
+    this.onScroll = () => {
+      const s = window.scrollY > 60;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    this.onResize = () => {
+      const m = window.innerWidth < 1100;
+      if (m !== this.state.mobile) this.setState({ mobile: m });
+    };
+    this.onKey = (e) => {
+      if (this.state.light === null) return;
+      if (e.key === 'Escape') this.setState({ light: null });
+      if (e.key === 'ArrowRight') this.step(1);
+      if (e.key === 'ArrowLeft') this.step(-1);
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('keydown', this.onKey);
+    this.onResize();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('keydown', this.onKey);
+  }
+
+  step(d) {
+    this.setState(s => ({ light: (s.light + d + GALLERY.length) % GALLERY.length }));
+  }
+  open(i) { return () => this.setState({ light: i }); }
+
+  renderVals() {
+    const { menu, scrolled, light, sent, mobile } = this.state;
+    const raw = (this.props.whatsapp ?? '').replace(/[^0-9]/g, '');
+    const waHref = raw
+      ? 'https://wa.me/' + raw + '?text=' + encodeURIComponent('Hola, quiero información y una cotización para un evento en Finca La Fortaleza.')
+      : '#contacto';
+    const barOn = (this.props.showQuoteBar ?? true) && mobile;
+    const openers = {};
+    GALLERY.forEach((_, i) => { openers['open' + i] = this.open(i); });
+    return Object.assign({
+      navBg: scrolled ? 'rgba(15,26,20,.93)' : 'linear-gradient(180deg, rgba(10,17,13,.6), rgba(10,17,13,0))',
+      navShadow: scrolled ? '0 1px 0 rgba(201,165,92,.28)' : 'none',
+      navDisplay: mobile ? 'none' : 'flex',
+      burgerDisplay: mobile ? 'flex' : 'none',
+      menuDisplay: menu ? 'flex' : 'none',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      waHref,
+      hasLightbox: light !== null,
+      lightboxDisplay: light !== null ? 'flex' : 'none',
+      lightboxSrc: light !== null ? GALLERY[light] : '',
+      lightboxCount: light !== null ? (light + 1) + ' / ' + GALLERY.length : '',
+      closeLightbox: () => this.setState({ light: null }),
+      prevLightbox: () => this.step(-1),
+      nextLightbox: () => this.step(1),
+      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      sentMessage: sent ? 'Gracias. Te contactamos en menos de 24 horas.' : '',
+      bottomInset: barOn ? 'calc(clamp(34px,5vw,64px) + 78px)' : 'clamp(34px,5vw,64px)',
+      footerInset: barOn ? '118px' : '40px',
+      quoteBarDisplay: barOn ? 'flex' : 'none',
+      floatDisplay: (this.props.showFloatingWhatsapp ?? true) ? 'inline-flex' : 'none',
+      floatBottom: barOn ? '88px' : 'clamp(20px,2.4vw,34px)'
+    }, openers);
+  }
+}
+</script>
+</body>
+</html>
