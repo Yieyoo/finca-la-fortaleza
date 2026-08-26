@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin:0; padding:0; background:#0F1A14; }
+  * { box-sizing:border-box; }
+  a { color:#C9A55C; text-decoration:none; }
+  a:hover { color:#E9DCC0; }
+  input, select, textarea, button { font-family:'Jost',Helvetica,sans-serif; }
+  ::selection { background:#C9A55C; color:#101A14; }
+  ::-webkit-scrollbar { width:10px; height:10px; }
+  ::-webkit-scrollbar-thumb { background:rgba(201,165,92,.35); }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:#FAF6EE; color:#1B2A20; font-family:'Jost',Helvetica,sans-serif; font-weight:300;">
+
+  <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+    <div style="min-height:100vh; display:grid; grid-template-columns:{{ loginCols }};">
+      <div style="position:relative; overflow:hidden; background:#0F1A14; display:{{ loginArtDisplay }};">
+        <img src="uploads/pasted-1787634226736-0.png" alt="Finca La Fortaleza" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,26,20,.6) 0%, rgba(15,26,20,.35) 45%, rgba(15,26,20,.92) 100%);"></div>
+        <div style="position:absolute; left:56px; bottom:56px; right:56px; display:grid; gap:14px;">
+          <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:34px; line-height:1.35; color:#FAF6EE; max-width:22ch;">Un lugar para celebrar momentos extraordinarios.</span>
+          <span style="font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:rgba(250,246,238,.6);">Santa María Cuevas · Zumpango</span>
+        </div>
+      </div>
+      <div style="display:grid; place-items:center; padding:clamp(24px,5vw,64px); background:#16241B;">
+        <form onSubmit="{{ doLogin }}" style="width:100%; max-width:420px; display:grid; gap:28px;">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <svg width="40" height="44" viewBox="0 0 40 44" aria-hidden="true" style="flex:none; display:block;">
+              <rect x="4" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+              <rect x="29" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+              <rect x="13" y="14" width="14" height="26" fill="#C9A55C" />
+              <rect x="12" y="7" width="4" height="7" fill="#C9A55C" />
+              <rect x="18" y="7" width="4" height="7" fill="#C9A55C" />
+              <rect x="24" y="7" width="4" height="7" fill="#C9A55C" />
+              <rect x="18" y="30" width="4" height="10" fill="#16241B" />
+            </svg>
+            <span style="display:grid; line-height:1.1;">
+              <span style="font-family:'Cormorant Garamond',serif; font-size:20px; letter-spacing:.16em; text-transform:uppercase; color:#FAF6EE;">Finca</span>
+              <span style="font-family:'Cormorant Garamond',serif; font-size:20px; letter-spacing:.16em; text-transform:uppercase; color:#C9A55C;">La Fortaleza</span>
+            </span>
+          </div>
+          <div style="display:grid; gap:10px;">
+            <h1 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:44px; line-height:1.05; color:#FAF6EE;">Sistema Administrativo</h1>
+            <p style="margin:0; font-size:15px; line-height:1.6; color:rgba(250,246,238,.6);">Acceso para el equipo de la finca.</p>
+          </div>
+          <label style="display:grid; gap:8px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.55);">Correo electrónico
+            <input type="email" value="recepcion@fincalafortaleza.mx" style="border:none; border-bottom:1px solid rgba(250,246,238,.3); background:transparent; padding:14px 0; font-size:16px; color:#FAF6EE; min-height:46px;" />
+          </label>
+          <label style="display:grid; gap:8px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.55);">Contraseña
+            <input type="password" value="demo1234" style="border:none; border-bottom:1px solid rgba(250,246,238,.3); background:transparent; padding:14px 0; font-size:16px; color:#FAF6EE; min-height:46px;" />
+          </label>
+          <button type="submit" style="background:#C9A55C; color:#16241B; border:none; padding:18px 30px; font-size:12px; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; min-height:48px;" style-hover="background:#E9DCC0;">Iniciar sesión</button>
+          <div style="display:flex; justify-content:space-between; gap:16px; font-size:13px; color:rgba(250,246,238,.55);">
+            <span>¿Olvidaste tu contraseña?</span>
+            <span style="color:rgba(250,246,238,.35);">Datos de demostración</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+    <div style="min-height:100vh; display:grid; grid-template-columns:{{ shellCols }};">
+
+      <aside style="display:{{ sidebarDisplay }}; position:{{ sidebarPos }}; inset:{{ sidebarInset }}; z-index:40; background:#16241B; padding:26px 0; grid-template-rows:auto 1fr auto; gap:26px; width:{{ sidebarWidth }};">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:0 24px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <svg width="30" height="33" viewBox="0 0 40 44" aria-hidden="true" style="flex:none; display:block;">
+              <rect x="4" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+              <rect x="29" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+              <rect x="13" y="14" width="14" height="26" fill="#C9A55C" />
+              <rect x="12" y="7" width="4" height="7" fill="#C9A55C" />
+              <rect x="18" y="7" width="4" height="7" fill="#C9A55C" />
+              <rect x="24" y="7" width="4" height="7" fill="#C9A55C" />
+              <rect x="18" y="30" width="4" height="10" fill="#16241B" />
+            </svg>
+            <span style="display:grid; line-height:1.1;">
+              <span style="font-family:'Cormorant Garamond',serif; font-size:15px; letter-spacing:.16em; text-transform:uppercase; color:#FAF6EE;">Finca</span>
+              <span style="font-family:'Cormorant Garamond',serif; font-size:15px; letter-spacing:.16em; text-transform:uppercase; color:#C9A55C;">La Fortaleza</span>
+            </span>
+          </div>
+          <button type="button" onClick="{{ closeSidebar }}" aria-label="Cerrar menú" style="display:{{ sidebarCloseDisplay }}; width:40px; height:40px; background:transparent; border:1px solid rgba(250,246,238,.25); color:#FAF6EE; font-size:18px; cursor:pointer;">×</button>
+        </div>
+        <nav style="display:grid; gap:2px; align-content:start; overflow-y:auto;">
+          <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="11">
+            <button type="button" onClick="{{ item.go }}" style="display:flex; align-items:center; gap:12px; text-align:left; border:none; background:{{ item.bg }}; color:{{ item.color }}; padding:13px 24px; font-size:14px; letter-spacing:.06em; cursor:pointer; border-left:2px solid {{ item.mark }}; min-height:46px;" style-hover="background:rgba(250,246,238,.06);">
+              <span style="width:6px; height:6px; border-radius:50%; background:{{ item.dot }}; flex:none;"></span>
+              {{ item.label }}
+            </button>
+          </sc-for>
+        </nav>
+        <div style="padding:0 24px; display:grid; gap:12px;">
+          <div style="border-top:1px solid rgba(250,246,238,.14); padding-top:18px; display:grid; gap:4px;">
+            <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#C9A55C;">Datos de demostración</span>
+            <span style="font-size:12px; line-height:1.5; color:rgba(250,246,238,.45);">Precios y registros de ejemplo.</span>
+          </div>
+        </div>
+      </aside>
+
+      <div style="min-width:0; display:grid; grid-template-rows:auto 1fr; background:#FAF6EE;">
+        <header style="position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px clamp(16px,3vw,36px); background:rgba(250,246,238,.94); backdrop-filter:blur(8px); border-bottom:1px solid rgba(27,42,32,.12);">
+          <div style="display:flex; align-items:center; gap:14px; min-width:0;">
+            <button type="button" onClick="{{ openSidebar }}" aria-label="Menú" style="display:{{ burgerDisplay }}; flex-direction:column; gap:5px; width:44px; height:44px; align-items:center; justify-content:center; background:transparent; border:1px solid rgba(27,42,32,.25); cursor:pointer; flex:none;">
+              <span style="display:block; width:18px; height:1px; background:#1B2A20;"></span>
+              <span style="display:block; width:18px; height:1px; background:#1B2A20;"></span>
+            </button>
+            <div style="display:grid; gap:3px; min-width:0;">
+              <span style="font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#9A7B3E;">{{ crumb }}</span>
+              <h1 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(22px,2.4vw,30px); line-height:1.1; color:#1B2A20; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ screenTitle }}</h1>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <button type="button" onClick="{{ goCotizador }}" style="display:{{ newQuoteDisplay }}; align-items:center; background:#16241B; color:#FAF6EE; border:none; padding:13px 20px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:44px;" style-hover="background:#C9A55C; color:#16241B;">Nueva cotización</button>
+            <button type="button" onClick="{{ toggleNotif }}" aria-label="Notificaciones" style="position:relative; width:44px; height:44px; background:transparent; border:1px solid rgba(27,42,32,.2); color:#1B2A20; cursor:pointer; font-size:15px;" style-hover="border-color:#C9A55C;">
+              ✽
+              <span style="position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; border-radius:10px; background:#C9A55C; color:#16241B; font-size:11px; display:grid; place-items:center; padding:0 5px;">4</span>
+            </button>
+            <div style="display:flex; align-items:center; gap:10px; padding-left:6px;">
+              <div style="width:40px; height:40px; border-radius:50%; background:#16241B; color:#C9A55C; display:grid; place-items:center; font-size:13px; letter-spacing:.06em; flex:none;">DM</div>
+              <div style="display:{{ userMetaDisplay }}; flex-direction:column; line-height:1.25;">
+                <span style="font-size:14px; color:#1B2A20;">Daniela M.</span>
+                <span style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#8A9A8C;">Administrador</span>
+              </div>
+              <button type="button" onClick="{{ logout }}" title="Cerrar sesión" style="width:40px; height:40px; background:transparent; border:1px solid rgba(27,42,32,.2); color:#1B2A20; cursor:pointer; font-size:14px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">⏻</button>
+            </div>
+          </div>
+        </header>
+
+        <div style="display:{{ notifDisplay }}; position:fixed; top:78px; right:clamp(12px,3vw,28px); z-index:35; width:min(360px,92vw); background:#16241B; border:1px solid rgba(201,165,92,.35); padding:20px; gap:14px; grid-template-columns:1fr; box-shadow:0 24px 60px rgba(9,15,12,.35);">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#C9A55C;">Notificaciones</span>
+            <button type="button" onClick="{{ toggleNotif }}" style="background:transparent; border:none; color:rgba(250,246,238,.6); font-size:16px; cursor:pointer;">×</button>
+          </div>
+          <sc-for list="{{ notifications }}" as="n" hint-placeholder-count="4">
+            <div style="display:grid; gap:5px; padding:12px 0; border-top:1px solid rgba(250,246,238,.12);">
+              <span style="font-size:14px; line-height:1.5; color:#FAF6EE;">{{ n.text }}</span>
+              <span style="font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(250,246,238,.4);">{{ n.time }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <main style="padding:clamp(18px,3vw,36px); min-width:0;">
+
+          <sc-if value="{{ atDashboard }}" hint-placeholder-val="{{ true }}">
+            <div style="display:grid; gap:clamp(18px,2.4vw,28px);">
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;">
+                <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="6">
+                  <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:22px; display:grid; gap:10px; align-content:start;">
+                    <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#9A7B3E;">{{ k.label }}</span>
+                    <span style="font-family:'Cormorant Garamond',serif; font-size:38px; line-height:1; color:#1B2A20;">{{ k.value }}</span>
+                    <span style="font-size:12px; letter-spacing:.06em; color:#8A9A8C;">{{ k.note }}</span>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:14px;">
+                <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:22px;">
+                  <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+                    <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Ventas por mes</h2>
+                    <span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8A9A8C;">Demo 2026</span>
+                  </div>
+                  <div style="display:flex; align-items:stretch; gap:10px; height:246px;">
+                    <sc-for list="{{ salesBars }}" as="b" hint-placeholder-count="8">
+                      <div style="flex:1; display:grid; grid-template-rows:auto minmax(0,1fr) auto; justify-items:center; gap:8px; height:100%; min-height:0;">
+                        <span style="font-size:11px; color:#8A9A8C;">{{ b.short }}</span>
+                        <div style="width:100%; align-self:end; height:{{ b.h }}; background:{{ b.fill }};"></div>
+                        <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8A9A8C;">{{ b.mes }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+
+                <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:20px; align-content:start;">
+                  <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Cotizaciones</h2>
+                  <sc-for list="{{ quoteStats }}" as="q" hint-placeholder-count="4">
+                    <div style="display:grid; gap:8px;">
+                      <div style="display:flex; justify-content:space-between; font-size:14px; color:#1B2A20;">
+                        <span>{{ q.label }}</span>
+                        <span style="color:#9A7B3E;">{{ q.n }}</span>
+                      </div>
+                      <div style="height:6px; background:rgba(27,42,32,.1);">
+                        <div style="height:6px; width:{{ q.w }}; background:{{ q.fill }};"></div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;">
+                  <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Próximos eventos</h2>
+                  <button type="button" onClick="{{ goEventos }}" style="background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:11px 18px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:44px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Ver calendario</button>
+                </div>
+                <div style="display:grid; gap:0;">
+                  <sc-for list="{{ upcoming }}" as="e" hint-placeholder-count="4">
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; align-items:center; padding:16px 0; border-top:1px solid rgba(27,42,32,.1);">
+                      <span style="font-family:'Cormorant Garamond',serif; font-size:22px; color:#1B2A20;">{{ e.titulo }}</span>
+                      <span style="font-size:14px; color:#4A5A4E;">{{ e.fecha }}</span>
+                      <span style="font-size:14px; color:#4A5A4E;">{{ e.invitados }} invitados</span>
+                      <span style="font-size:14px; color:#1B2A20;">{{ e.monto }}</span>
+                      <span style="justify-self:start; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{ e.estadoColor }}; border:1px solid {{ e.estadoColor }}; padding:7px 12px;">{{ e.estado }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atCotizaciones }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:18px;">
+              <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+                <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#9A7B3E;">Filtros</span>
+                <sc-for list="{{ quoteFilters }}" as="ff" hint-placeholder-count="5">
+                  <span style="border:1px solid rgba(27,42,32,.22); padding:9px 15px; font-size:12px; letter-spacing:.06em; color:#4A5A4E;">{{ ff }}</span>
+                </sc-for>
+              </div>
+              <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); overflow-x:auto;">
+                <div style="min-width:820px;">
+                  <div style="display:grid; grid-template-columns:1.1fr 1.4fr 1fr 1fr 1fr .9fr .8fr; gap:12px; padding:16px 22px; background:#EFE7D7; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#6B7A6C;">
+                    <span>Folio</span><span>Cliente</span><span>Evento</span><span>Fecha evento</span><span>Total</span><span>Estado</span><span>Acción</span>
+                  </div>
+                  <sc-for list="{{ quotes }}" as="q" hint-placeholder-count="6">
+                    <div style="display:grid; grid-template-columns:1.1fr 1.4fr 1fr 1fr 1fr .9fr .8fr; gap:12px; padding:18px 22px; border-top:1px solid rgba(27,42,32,.1); align-items:center; font-size:14px; color:#1B2A20;">
+                      <span style="letter-spacing:.06em; color:#9A7B3E;">{{ q.folio }}</span>
+                      <span>{{ q.cliente }}</span>
+                      <span style="color:#4A5A4E;">{{ q.evento }}</span>
+                      <span style="color:#4A5A4E;">{{ q.fecha }}</span>
+                      <span>{{ q.total }}</span>
+                      <span style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:{{ q.color }};">{{ q.estado }}</span>
+                      <button type="button" onClick="{{ q.open }}" style="justify-self:start; background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:9px 14px; font-size:11px; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; min-height:40px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Ver</button>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atCotizador }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:20px;">
+              <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ s.go }}" style="display:flex; align-items:center; gap:10px; background:{{ s.bg }}; color:{{ s.color }}; border:1px solid {{ s.border }}; padding:12px 18px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; cursor:pointer; min-height:44px;">
+                    <span style="font-family:'Cormorant Garamond',serif; font-size:18px;">{{ s.n }}</span>
+                    {{ s.label }}
+                  </button>
+                </sc-for>
+              </div>
+
+              <sc-if value="{{ step1 }}" hint-placeholder-val="{{ true }}">
+                <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;">
+                  <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:20px; align-content:start;">
+                    <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Cliente</h2>
+                    <label style="display:grid; gap:8px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Nombre
+                      <input type="text" value="{{ cliente }}" onInput="{{ setCliente }}" style="border:none; border-bottom:1px solid rgba(27,42,32,.25); background:transparent; padding:13px 0; font-size:16px; color:#1B2A20; min-height:46px;" />
+                    </label>
+                    <label style="display:grid; gap:8px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Teléfono
+                      <input type="tel" value="55 0000 0000" style="border:none; border-bottom:1px solid rgba(27,42,32,.25); background:transparent; padding:13px 0; font-size:16px; color:#1B2A20; min-height:46px;" />
+                    </label>
+                    <label style="display:grid; gap:8px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Correo
+                      <input type="email" value="cliente@correo.com" style="border:none; border-bottom:1px solid rgba(27,42,32,.25); background:transparent; padding:13px 0; font-size:16px; color:#1B2A20; min-height:46px;" />
+                    </label>
+                  </div>
+                  <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:20px; align-content:start;">
+                    <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Evento</h2>
+                    <div style="display:grid; gap:10px;">
+                      <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Tipo de evento</span>
+                      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                        <sc-for list="{{ eventTypes }}" as="t" hint-placeholder-count="6">
+                          <button type="button" onClick="{{ t.pick }}" style="background:{{ t.bg }}; color:{{ t.color }}; border:1px solid {{ t.border }}; padding:11px 16px; font-size:12px; letter-spacing:.08em; cursor:pointer; min-height:44px;">{{ t.label }}</button>
+                        </sc-for>
+                      </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                      <label style="display:grid; gap:8px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Fecha
+                        <input type="date" value="2026-09-15" style="border:none; border-bottom:1px solid rgba(27,42,32,.25); background:transparent; padding:13px 0; font-size:16px; color:#1B2A20; min-height:46px;" />
+                      </label>
+                      <label style="display:grid; gap:8px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Invitados
+                        <input type="number" min="1" value="{{ invitados }}" onInput="{{ setInvitados }}" style="border:none; border-bottom:1px solid rgba(27,42,32,.25); background:transparent; padding:13px 0; font-size:16px; color:#1B2A20; min-height:46px;" />
+                      </label>
+                    </div>
+                    <div style="display:grid; gap:10px;">
+                      <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Espacio</span>
+                      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                        <sc-for list="{{ spaces }}" as="sp" hint-placeholder-count="5">
+                          <button type="button" onClick="{{ sp.pick }}" style="background:{{ sp.bg }}; color:{{ sp.color }}; border:1px solid {{ sp.border }}; padding:11px 16px; font-size:12px; letter-spacing:.08em; cursor:pointer; min-height:44px;">{{ sp.label }}</button>
+                        </sc-for>
+                      </div>
+                    </div>
+                    <button type="button" onClick="{{ toStep2 }}" style="justify-self:start; background:#16241B; color:#FAF6EE; border:none; padding:16px 26px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="background:#C9A55C; color:#16241B;">Continuar al catálogo</button>
+                  </div>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid; grid-template-columns:{{ builderCols }}; gap:16px; align-items:start;">
+                  <div style="display:grid; gap:16px; min-width:0;">
+                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                      <sc-for list="{{ categories }}" as="c" hint-placeholder-count="8">
+                        <button type="button" onClick="{{ c.pick }}" style="background:{{ c.bg }}; color:{{ c.color }}; border:1px solid {{ c.border }}; padding:11px 16px; font-size:12px; letter-spacing:.08em; cursor:pointer; min-height:44px;">{{ c.label }}</button>
+                      </sc-for>
+                    </div>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px;">
+                      <sc-for list="{{ visibleProducts }}" as="p" hint-placeholder-count="8">
+                        <article style="background:#FFFFFF; border:1px solid {{ p.cardBorder }}; display:grid; grid-template-rows:auto 1fr auto;">
+                          <span style="display:block; width:100%; aspect-ratio:4/3; background-color:#EFE7D7; background-image:{{ p.bg }}; background-size:cover; background-position:center;" role="img" aria-label="{{ p.nombre }}"></span>
+                          <div style="padding:16px; display:grid; gap:8px; align-content:start;">
+                            <div style="display:flex; justify-content:space-between; gap:10px; align-items:baseline;">
+                              <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:20px; color:#1B2A20;">{{ p.nombre }}</h3>
+                              <span style="font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:{{ p.dispColor }};">{{ p.disp }}</span>
+                            </div>
+                            <p style="margin:0; font-size:13px; line-height:1.55; color:#6B7A6C;">{{ p.desc }}</p>
+                            <span style="font-size:15px; color:#9A7B3E;">{{ p.precioTxt }}</span>
+                          </div>
+                          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px; border-top:1px solid rgba(27,42,32,.1);">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                              <button type="button" onClick="{{ p.dec }}" aria-label="Quitar" style="width:40px; height:40px; background:transparent; border:1px solid rgba(27,42,32,.22); color:#1B2A20; cursor:pointer; font-size:16px;">−</button>
+                              <span style="min-width:34px; text-align:center; font-size:15px; color:#1B2A20;">{{ p.qty }}</span>
+                              <button type="button" onClick="{{ p.inc }}" aria-label="Agregar" style="width:40px; height:40px; background:transparent; border:1px solid rgba(27,42,32,.22); color:#1B2A20; cursor:pointer; font-size:16px;">+</button>
+                            </div>
+                            <button type="button" onClick="{{ p.fill }}" style="background:transparent; border:1px solid rgba(201,165,92,.6); color:#9A7B3E; padding:10px 12px; font-size:10px; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; min-height:40px;">Por invitado</button>
+                          </div>
+                        </article>
+                      </sc-for>
+                    </div>
+                  </div>
+
+                  <aside style="position:sticky; top:96px; background:#16241B; padding:24px; display:grid; gap:18px; align-content:start; min-width:0;">
+                    <div style="display:grid; gap:6px;">
+                      <span style="font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#C9A55C;">Resumen</span>
+                      <span style="font-family:'Cormorant Garamond',serif; font-size:28px; color:#FAF6EE;">{{ tipoEvento }}</span>
+                      <span style="font-size:13px; color:rgba(250,246,238,.6);">{{ invitados }} invitados · {{ espacio }}</span>
+                    </div>
+                    <div style="display:grid; gap:0; border-top:1px solid rgba(250,246,238,.16);">
+                      <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="3">
+                        <div style="display:grid; gap:4px; padding:13px 0; border-bottom:1px solid rgba(250,246,238,.12);">
+                          <div style="display:flex; justify-content:space-between; gap:10px; font-size:14px; color:#FAF6EE;">
+                            <span>{{ l.nombre }}</span>
+                            <span>{{ l.totalTxt }}</span>
+                          </div>
+                          <span style="font-size:12px; color:rgba(250,246,238,.5);">{{ l.detalle }}</span>
+                        </div>
+                      </sc-for>
+                      <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
+                        <span style="padding:16px 0; font-size:13px; color:rgba(250,246,238,.45);">Sin productos seleccionados.</span>
+                      </sc-if>
+                    </div>
+                    <div style="display:grid; gap:10px;">
+                      <div style="display:flex; justify-content:space-between; font-size:14px; color:rgba(250,246,238,.7);"><span>Subtotal</span><span>{{ subtotalTxt }}</span></div>
+                      <div style="display:flex; justify-content:space-between; align-items:center; font-size:14px; color:rgba(250,246,238,.7);">
+                        <span>Descuento</span>
+                        <span style="display:flex; align-items:center; gap:8px;">
+                          <button type="button" onClick="{{ descMinus }}" style="width:34px; height:34px; background:transparent; border:1px solid rgba(250,246,238,.25); color:#FAF6EE; cursor:pointer;">−</button>
+                          <span style="min-width:44px; text-align:center; color:#FAF6EE;">{{ descPct }}%</span>
+                          <button type="button" onClick="{{ descPlus }}" style="width:34px; height:34px; background:transparent; border:1px solid rgba(250,246,238,.25); color:#FAF6EE; cursor:pointer;">+</button>
+                        </span>
+                      </div>
+                      <div style="display:flex; justify-content:space-between; font-size:14px; color:#C9A55C;"><span>Ahorro</span><span>{{ descTxt }}</span></div>
+                      <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; border-top:1px solid rgba(250,246,238,.2); padding-top:14px;">
+                        <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(250,246,238,.6);">Total estimado</span>
+                        <span style="font-family:'Cormorant Garamond',serif; font-size:36px; color:#FAF6EE;">{{ totalTxt }}</span>
+                      </div>
+                    </div>
+                    <button type="button" onClick="{{ toStep3 }}" style="background:#C9A55C; color:#16241B; border:none; padding:16px 22px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="background:#E9DCC0;">Generar cotización</button>
+                    <span style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:rgba(250,246,238,.35);">Precios de demostración</span>
+                  </aside>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid; gap:16px;">
+                  <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.12); padding:clamp(22px,3vw,44px); display:grid; gap:26px;">
+                    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px; align-items:flex-start; border-bottom:1px solid rgba(27,42,32,.12); padding-bottom:22px;">
+                      <div style="display:flex; align-items:center; gap:14px;">
+                        <svg width="38" height="42" viewBox="0 0 40 44" aria-hidden="true" style="flex:none; display:block;">
+                          <rect x="4" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+                          <rect x="29" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+                          <rect x="13" y="14" width="14" height="26" fill="#C9A55C" />
+                          <rect x="12" y="7" width="4" height="7" fill="#C9A55C" />
+                          <rect x="18" y="7" width="4" height="7" fill="#C9A55C" />
+                          <rect x="24" y="7" width="4" height="7" fill="#C9A55C" />
+                          <rect x="18" y="30" width="4" height="10" fill="#FFFFFF" />
+                        </svg>
+                        <span style="display:grid; line-height:1.15;">
+                          <span style="font-family:'Cormorant Garamond',serif; font-size:19px; letter-spacing:.16em; text-transform:uppercase; color:#1B2A20;">Finca</span>
+                          <span style="font-family:'Cormorant Garamond',serif; font-size:19px; letter-spacing:.16em; text-transform:uppercase; color:#9A7B3E;">La Fortaleza</span>
+                        </span>
+                      </div>
+                      <div style="display:grid; gap:6px; text-align:right;">
+                        <span style="font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:#9A7B3E;">Cotización</span>
+                        <span style="font-family:'Cormorant Garamond',serif; font-size:30px; color:#1B2A20;">FT-2026-0001</span>
+                        <span style="font-size:13px; color:#6B7A6C;">Emitida 25/08/2026</span>
+                      </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:18px;">
+                      <div style="display:grid; gap:6px;"><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8A9A8C;">Cliente</span><span style="font-size:17px; color:#1B2A20;">{{ cliente }}</span></div>
+                      <div style="display:grid; gap:6px;"><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8A9A8C;">Evento</span><span style="font-size:17px; color:#1B2A20;">{{ tipoEvento }}</span></div>
+                      <div style="display:grid; gap:6px;"><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8A9A8C;">Fecha del evento</span><span style="font-size:17px; color:#1B2A20;">15/09/2026</span></div>
+                      <div style="display:grid; gap:6px;"><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8A9A8C;">Invitados</span><span style="font-size:17px; color:#1B2A20;">{{ invitados }}</span></div>
+                      <div style="display:grid; gap:6px;"><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8A9A8C;">Espacio</span><span style="font-size:17px; color:#1B2A20;">{{ espacio }}</span></div>
+                    </div>
+                    <div style="display:grid; gap:0; overflow-x:auto;">
+                      <div style="min-width:560px;">
+                        <div style="display:grid; grid-template-columns:2.2fr .8fr 1fr 1fr; gap:12px; padding:14px 0; border-bottom:1px solid rgba(27,42,32,.2); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#6B7A6C;">
+                          <span>Producto o servicio</span><span>Cantidad</span><span>Precio</span><span style="text-align:right;">Total</span>
+                        </div>
+                        <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="4">
+                          <div style="display:grid; grid-template-columns:2.2fr .8fr 1fr 1fr; gap:12px; padding:14px 0; border-bottom:1px solid rgba(27,42,32,.1); font-size:15px; color:#1B2A20;">
+                            <span>{{ l.nombre }}</span>
+                            <span style="color:#4A5A4E;">{{ l.qty }}</span>
+                            <span style="color:#4A5A4E;">{{ l.precioTxt }}</span>
+                            <span style="text-align:right;">{{ l.totalTxt }}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                    <div style="display:grid; justify-items:end; gap:10px;">
+                      <div style="display:grid; grid-template-columns:auto auto; gap:10px 40px; font-size:15px; color:#4A5A4E;">
+                        <span>Subtotal</span><span style="text-align:right; color:#1B2A20;">{{ subtotalTxt }}</span>
+                        <span>Descuento {{ descPct }}%</span><span style="text-align:right; color:#9A7B3E;">{{ descTxt }}</span>
+                        <span>Anticipo sugerido 50%</span><span style="text-align:right; color:#1B2A20;">{{ anticipoTxt }}</span>
+                        <span>Saldo pendiente</span><span style="text-align:right; color:#1B2A20;">{{ saldoTxt }}</span>
+                      </div>
+                      <div style="display:flex; align-items:baseline; gap:18px; border-top:1px solid rgba(27,42,32,.2); padding-top:14px;">
+                        <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Total</span>
+                        <span style="font-family:'Cormorant Garamond',serif; font-size:44px; color:#1B2A20;">{{ totalTxt }}</span>
+                      </div>
+                    </div>
+                    <p style="margin:0; font-size:12px; letter-spacing:.1em; color:#8A9A8C;">Cotización de demostración. Vigencia y condiciones se confirman con la finca.</p>
+                  </div>
+                  <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                    <button type="button" style="background:#16241B; color:#FAF6EE; border:none; padding:15px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="background:#C9A55C; color:#16241B;">Guardar cotización</button>
+                    <button type="button" style="background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:15px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Enviar por WhatsApp</button>
+                    <button type="button" style="background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:15px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Descargar PDF</button>
+                    <button type="button" style="background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:15px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Imprimir</button>
+                    <button type="button" onClick="{{ goPagoFlow }}" style="background:#C9A55C; color:#16241B; border:none; padding:15px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="background:#E9DCC0;">Registrar anticipo</button>
+                    <button type="button" onClick="{{ convertirEvento }}" style="background:transparent; border:1px solid #16241B; color:#16241B; padding:15px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="background:#16241B; color:#FAF6EE;">Convertir en evento</button>
+                  </div>
+                  <div style="display:{{ convertidoDisplay }}; background:#EFE7D7; border:1px solid rgba(201,165,92,.5); padding:18px 22px; gap:6px; grid-template-columns:1fr;">
+                    <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#9A7B3E;">Evento creado</span>
+                    <span style="font-size:15px; color:#1B2A20;">Se reutilizaron cliente, fecha, invitados, servicios y total. No hay que capturar nada de nuevo.</span>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atPago }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; align-items:start;">
+              <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:20px; align-content:start;">
+                <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Registrar pago</h2>
+                <div style="display:grid; gap:10px;">
+                  <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Método</span>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <sc-for list="{{ methods }}" as="m" hint-placeholder-count="4">
+                      <button type="button" onClick="{{ m.pick }}" style="background:{{ m.bg }}; color:{{ m.color }}; border:1px solid {{ m.border }}; padding:11px 16px; font-size:12px; letter-spacing:.08em; cursor:pointer; min-height:44px;">{{ m.label }}</button>
+                    </sc-for>
+                  </div>
+                </div>
+                <label style="display:grid; gap:8px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#8A9A8C;">Monto recibido
+                  <input type="text" value="{{ anticipoTxt }}" style="border:none; border-bottom:1px solid rgba(27,42,32,.25); background:transparent; padding:13px 0; font-size:20px; color:#1B2A20; min-height:46px;" />
+                </label>
+                <div style="display:grid; gap:10px; border-top:1px solid rgba(27,42,32,.12); padding-top:16px; font-size:15px; color:#4A5A4E;">
+                  <div style="display:flex; justify-content:space-between;"><span>Total de la cotización</span><span style="color:#1B2A20;">{{ totalTxt }}</span></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Saldo pendiente</span><span style="color:#1B2A20;">{{ saldoTxt }}</span></div>
+                </div>
+                <button type="button" onClick="{{ goTicket }}" style="justify-self:start; background:#C9A55C; color:#16241B; border:none; padding:16px 26px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="background:#E9DCC0;">Generar ticket</button>
+              </div>
+              <div style="background:#16241B; padding:26px; display:grid; gap:16px; align-content:start;">
+                <span style="font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#C9A55C;">Flujo conectado</span>
+                <sc-for list="{{ flowSteps }}" as="fs" hint-placeholder-count="7">
+                  <div style="display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid rgba(250,246,238,.12);">
+                    <span style="width:26px; height:26px; border-radius:50%; border:1px solid {{ fs.color }}; color:{{ fs.color }}; display:grid; place-items:center; font-size:12px; flex:none;">{{ fs.n }}</span>
+                    <span style="font-size:14px; color:{{ fs.text }};">{{ fs.label }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atTicket }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:16px; justify-items:start;">
+              <div style="width:min(520px,100%); background:#FFFFFF; border:1px solid rgba(27,42,32,.14); padding:clamp(22px,3vw,34px); display:grid; gap:20px;">
+                <div style="display:grid; justify-items:center; gap:10px; text-align:center; border-bottom:1px dashed rgba(27,42,32,.25); padding-bottom:18px;">
+                  <svg width="42" height="46" viewBox="0 0 40 44" aria-hidden="true" style="display:block;">
+                    <rect x="4" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+                    <rect x="29" y="24" width="7" height="16" fill="#C9A55C" opacity="0.55" />
+                    <rect x="13" y="14" width="14" height="26" fill="#C9A55C" />
+                    <rect x="12" y="7" width="4" height="7" fill="#C9A55C" />
+                    <rect x="18" y="7" width="4" height="7" fill="#C9A55C" />
+                    <rect x="24" y="7" width="4" height="7" fill="#C9A55C" />
+                    <rect x="18" y="30" width="4" height="10" fill="#FFFFFF" />
+                  </svg>
+                  <span style="font-family:'Cormorant Garamond',serif; font-size:24px; letter-spacing:.16em; text-transform:uppercase; color:#1B2A20;">Finca La Fortaleza</span>
+                  <span style="font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:#9A7B3E;">Bodas · Eventos · Hospedaje</span>
+                </div>
+                <div style="display:grid; gap:10px; font-size:14px; color:#4A5A4E;">
+                  <div style="display:flex; justify-content:space-between;"><span>No. de ticket</span><span style="color:#1B2A20;">TK-2026-0001</span></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Fecha</span><span style="color:#1B2A20;">25/08/2026</span></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Cliente</span><span style="color:#1B2A20;">{{ cliente }}</span></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Evento</span><span style="color:#1B2A20;">{{ tipoEvento }}</span></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Fecha del evento</span><span style="color:#1B2A20;">15/09/2026</span></div>
+                </div>
+                <div style="display:grid; gap:0; border-top:1px dashed rgba(27,42,32,.25); padding-top:14px;">
+                  <div style="display:grid; grid-template-columns:2fr .6fr 1fr; gap:10px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#8A9A8C; padding-bottom:10px;">
+                    <span>Concepto</span><span>Cant.</span><span style="text-align:right;">Total</span>
+                  </div>
+                  <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="4">
+                    <div style="display:grid; grid-template-columns:2fr .6fr 1fr; gap:10px; padding:9px 0; border-top:1px solid rgba(27,42,32,.08); font-size:14px; color:#1B2A20;">
+                      <span>{{ l.nombre }}</span>
+                      <span style="color:#4A5A4E;">{{ l.qty }}</span>
+                      <span style="text-align:right;">{{ l.totalTxt }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="display:grid; gap:8px; border-top:1px dashed rgba(27,42,32,.25); padding-top:14px; font-size:14px; color:#4A5A4E;">
+                  <div style="display:flex; justify-content:space-between;"><span>Subtotal</span><span style="color:#1B2A20;">{{ subtotalTxt }}</span></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Descuento</span><span style="color:#9A7B3E;">{{ descTxt }}</span></div>
+                  <div style="display:flex; justify-content:space-between; align-items:baseline;"><span>Total</span><span style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#1B2A20;">{{ totalTxt }}</span></div>
+                </div>
+                <div style="display:grid; gap:8px; background:#EFE7D7; padding:16px; font-size:14px; color:#4A5A4E;">
+                  <div style="display:flex; justify-content:space-between;"><span>Método</span><span style="color:#1B2A20;">{{ metodo }}</span></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Monto</span><span style="color:#1B2A20;">{{ anticipoTxt }}</span></div>
+                  <div style="display:flex; justify-content:space-between;"><span>Saldo pendiente</span><span style="color:#1B2A20;">{{ saldoTxt }}</span></div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(27,42,32,.15); padding-top:10px;"><span>Estado</span><span style="font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#16241B; background:#C9A55C; padding:7px 12px;">Anticipo recibido</span></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px; border-top:1px dashed rgba(27,42,32,.25); padding-top:18px;">
+                  <div style="display:grid; gap:8px; flex:1;">
+                    <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:#1B2A20;">Gracias por confiar en Finca La Fortaleza.</span>
+                    <span style="border-top:1px solid rgba(27,42,32,.35); padding-top:8px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#8A9A8C;">Firma / autorización</span>
+                  </div>
+                  <div style="width:78px; height:78px; background-color:#1B2A20; background-image:repeating-linear-gradient(90deg,#FFFFFF 0 6px, transparent 6px 12px), repeating-linear-gradient(0deg,#FFFFFF 0 6px, transparent 6px 12px); flex:none;" title="QR de la reservación"></div>
+                </div>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                <button type="button" style="background:#16241B; color:#FAF6EE; border:none; padding:15px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="background:#C9A55C; color:#16241B;">Descargar PDF</button>
+                <button type="button" style="background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:15px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Imprimir</button>
+                <button type="button" onClick="{{ goTickets }}" style="background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:15px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Ir al historial</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atTickets }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:18px;">
+              <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+                <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#9A7B3E;">Filtros</span>
+                <sc-for list="{{ ticketFilters }}" as="ff" hint-placeholder-count="5">
+                  <span style="border:1px solid rgba(27,42,32,.22); padding:9px 15px; font-size:12px; color:#4A5A4E;">{{ ff }}</span>
+                </sc-for>
+              </div>
+              <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); overflow-x:auto;">
+                <div style="min-width:900px;">
+                  <div style="display:grid; grid-template-columns:1fr 1.3fr 1fr 1fr 1fr 1fr 1fr; gap:12px; padding:16px 22px; background:#EFE7D7; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#6B7A6C;">
+                    <span>No. ticket</span><span>Cliente</span><span>Evento</span><span>Fecha</span><span>Monto</span><span>Método</span><span>Estado</span>
+                  </div>
+                  <sc-for list="{{ tickets }}" as="t" hint-placeholder-count="6">
+                    <div style="display:grid; grid-template-columns:1fr 1.3fr 1fr 1fr 1fr 1fr 1fr; gap:12px; padding:18px 22px; border-top:1px solid rgba(27,42,32,.1); align-items:center; font-size:14px; color:#1B2A20;">
+                      <span style="color:#9A7B3E;">{{ t.folio }}</span>
+                      <span>{{ t.cliente }}</span>
+                      <span style="color:#4A5A4E;">{{ t.evento }}</span>
+                      <span style="color:#4A5A4E;">{{ t.fecha }}</span>
+                      <span>{{ t.monto }}</span>
+                      <span style="color:#4A5A4E;">{{ t.metodo }}</span>
+                      <span style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:{{ t.color }};">{{ t.estado }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atEventos }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:20px;">
+              <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:24px; display:grid; gap:18px;">
+                <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;">
+                  <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Septiembre 2026</h2>
+                  <div style="display:flex; flex-wrap:wrap; gap:14px; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#6B7A6C;">
+                    <span style="display:flex; align-items:center; gap:7px;"><span style="width:9px; height:9px; background:#C9A55C;"></span>Confirmado</span>
+                    <span style="display:flex; align-items:center; gap:7px;"><span style="width:9px; height:9px; background:#8A9A8C;"></span>Pendiente</span>
+                    <span style="display:flex; align-items:center; gap:7px;"><span style="width:9px; height:9px; background:#16241B;"></span>En preparación</span>
+                  </div>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:6px;">
+                  <sc-for list="{{ weekDays }}" as="d" hint-placeholder-count="7">
+                    <span style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#8A9A8C; padding-bottom:6px;">{{ d }}</span>
+                  </sc-for>
+                  <sc-for list="{{ calendar }}" as="c" hint-placeholder-count="35">
+                    <div style="min-height:76px; border:1px solid rgba(27,42,32,.1); background:{{ c.bg }}; padding:8px; display:grid; gap:6px; align-content:start;">
+                      <span style="font-size:12px; color:{{ c.numColor }};">{{ c.num }}</span>
+                      <span style="font-size:11px; line-height:1.35; color:{{ c.evColor }};">{{ c.ev }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px;">
+                <sc-for list="{{ eventCards }}" as="e" hint-placeholder-count="4">
+                  <article style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); display:grid; grid-template-rows:auto 1fr;">
+                    <span style="display:block; width:100%; aspect-ratio:16/10; background-color:#EFE7D7; background-image:{{ e.bg }}; background-size:cover; background-position:center;" role="img" aria-label="{{ e.titulo }}"></span>
+                    <div style="padding:18px; display:grid; gap:10px; align-content:start;">
+                      <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:22px; color:#1B2A20;">{{ e.titulo }}</h3>
+                      <span style="font-size:14px; color:#4A5A4E;">{{ e.fecha }} · {{ e.invitados }} invitados</span>
+                      <span style="font-size:17px; color:#9A7B3E;">{{ e.monto }}</span>
+                      <span style="justify-self:start; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{ e.estadoColor }}; border:1px solid {{ e.estadoColor }}; padding:7px 12px;">{{ e.estado }}</span>
+                    </div>
+                  </article>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atClientes }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:18px;">
+              <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); overflow-x:auto;">
+                <div style="min-width:900px;">
+                  <div style="display:grid; grid-template-columns:1.4fr 1fr 1.3fr .7fr 1fr 1fr .9fr; gap:12px; padding:16px 22px; background:#EFE7D7; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#6B7A6C;">
+                    <span>Cliente</span><span>Teléfono</span><span>Correo</span><span>Eventos</span><span>Última cotización</span><span>Total</span><span>Estado</span>
+                  </div>
+                  <sc-for list="{{ clients }}" as="c" hint-placeholder-count="5">
+                    <button type="button" onClick="{{ c.open }}" style="width:100%; text-align:left; background:transparent; border:none; border-top:1px solid rgba(27,42,32,.1); cursor:pointer; display:grid; grid-template-columns:1.4fr 1fr 1.3fr .7fr 1fr 1fr .9fr; gap:12px; padding:18px 22px; align-items:center; font-size:14px; color:#1B2A20;" style-hover="background:#FAF6EE;">
+                      <span>{{ c.nombre }}</span>
+                      <span style="color:#4A5A4E;">{{ c.tel }}</span>
+                      <span style="color:#4A5A4E;">{{ c.correo }}</span>
+                      <span style="color:#4A5A4E;">{{ c.eventos }}</span>
+                      <span style="color:#4A5A4E;">{{ c.ultima }}</span>
+                      <span>{{ c.total }}</span>
+                      <span style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:{{ c.color }};">{{ c.estado }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atCliente }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:16px;">
+              <button type="button" onClick="{{ goClientes }}" style="justify-self:start; background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:11px 18px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; cursor:pointer; min-height:44px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">← Clientes</button>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px;">
+                <div style="background:#16241B; padding:26px; display:grid; gap:14px; align-content:start;">
+                  <span style="font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#C9A55C;">Cliente</span>
+                  <span style="font-family:'Cormorant Garamond',serif; font-size:34px; color:#FAF6EE;">{{ clienteSel.nombre }}</span>
+                  <span style="font-size:14px; color:rgba(250,246,238,.65);">{{ clienteSel.tel }}</span>
+                  <span style="font-size:14px; color:rgba(250,246,238,.65);">{{ clienteSel.correo }}</span>
+                  <div style="display:grid; gap:10px; border-top:1px solid rgba(250,246,238,.16); padding-top:16px; font-size:14px; color:rgba(250,246,238,.7);">
+                    <div style="display:flex; justify-content:space-between;"><span>Eventos</span><span style="color:#FAF6EE;">{{ clienteSel.eventos }}</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>Total gastado</span><span style="color:#FAF6EE;">{{ clienteSel.total }}</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>Estado</span><span style="color:#C9A55C;">{{ clienteSel.estado }}</span></div>
+                  </div>
+                </div>
+                <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:16px; align-content:start;">
+                  <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:26px; color:#1B2A20;">Historial</h2>
+                  <sc-for list="{{ clientHistory }}" as="h" hint-placeholder-count="5">
+                    <div style="display:grid; gap:6px; padding:14px 0; border-top:1px solid rgba(27,42,32,.1);">
+                      <div style="display:flex; justify-content:space-between; gap:12px; font-size:15px; color:#1B2A20;">
+                        <span>{{ h.tipo }}</span>
+                        <span style="color:#9A7B3E;">{{ h.monto }}</span>
+                      </div>
+                      <span style="font-size:13px; color:#6B7A6C;">{{ h.detalle }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atPagos }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:16px;">
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;">
+                <sc-for list="{{ payKpis }}" as="k" hint-placeholder-count="4">
+                  <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:22px; display:grid; gap:10px;">
+                    <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#9A7B3E;">{{ k.label }}</span>
+                    <span style="font-family:'Cormorant Garamond',serif; font-size:34px; color:#1B2A20;">{{ k.value }}</span>
+                    <span style="font-size:12px; color:#8A9A8C;">{{ k.note }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); overflow-x:auto;">
+                <div style="min-width:820px;">
+                  <div style="display:grid; grid-template-columns:1fr 1.3fr 1.1fr 1fr 1fr 1fr; gap:12px; padding:16px 22px; background:#EFE7D7; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#6B7A6C;">
+                    <span>Fecha</span><span>Cliente</span><span>Evento</span><span>Monto</span><span>Método</span><span>Estado</span>
+                  </div>
+                  <sc-for list="{{ payments }}" as="p" hint-placeholder-count="6">
+                    <div style="display:grid; grid-template-columns:1fr 1.3fr 1.1fr 1fr 1fr 1fr; gap:12px; padding:18px 22px; border-top:1px solid rgba(27,42,32,.1); align-items:center; font-size:14px; color:#1B2A20;">
+                      <span style="color:#4A5A4E;">{{ p.fecha }}</span>
+                      <span>{{ p.cliente }}</span>
+                      <span style="color:#4A5A4E;">{{ p.evento }}</span>
+                      <span>{{ p.monto }}</span>
+                      <span style="color:#4A5A4E;">{{ p.metodo }}</span>
+                      <span style="font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:{{ p.color }};">{{ p.estado }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atCatalogo }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:18px;">
+              <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;">
+                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                  <sc-for list="{{ categories }}" as="c" hint-placeholder-count="8">
+                    <button type="button" onClick="{{ c.pick }}" style="background:{{ c.bg }}; color:{{ c.color }}; border:1px solid {{ c.border }}; padding:11px 16px; font-size:12px; letter-spacing:.08em; cursor:pointer; min-height:44px;">{{ c.label }}</button>
+                  </sc-for>
+                </div>
+                <button type="button" style="background:#16241B; color:#FAF6EE; border:none; padding:13px 22px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:44px;" style-hover="background:#C9A55C; color:#16241B;">Agregar producto</button>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:14px;">
+                <sc-for list="{{ visibleProducts }}" as="p" hint-placeholder-count="8">
+                  <article style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); display:grid; grid-template-rows:auto 1fr auto;">
+                    <div style="position:relative;">
+                      <span style="display:block; width:100%; aspect-ratio:4/3; background-color:#EFE7D7; background-image:{{ p.bg }}; background-size:cover; background-position:center;" role="img" aria-label="{{ p.nombre }}"></span>
+                      <span style="position:absolute; top:12px; left:12px; background:rgba(15,26,20,.85); color:{{ p.dispColor }}; font-size:10px; letter-spacing:.16em; text-transform:uppercase; padding:7px 11px;">{{ p.disp }}</span>
+                    </div>
+                    <div style="padding:16px; display:grid; gap:8px; align-content:start;">
+                      <span style="font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#9A7B3E;">{{ p.cat }}</span>
+                      <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:20px; color:#1B2A20;">{{ p.nombre }}</h3>
+                      <p style="margin:0; font-size:13px; line-height:1.55; color:#6B7A6C;">{{ p.desc }}</p>
+                      <span style="font-size:16px; color:#1B2A20;">{{ p.precioTxt }}</span>
+                    </div>
+                    <div style="display:flex; gap:8px; padding:12px 16px; border-top:1px solid rgba(27,42,32,.1);">
+                      <button type="button" style="flex:1; background:transparent; border:1px solid rgba(27,42,32,.22); color:#1B2A20; padding:10px; font-size:10px; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; min-height:40px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Editar</button>
+                      <button type="button" onClick="{{ p.toggle }}" style="flex:1; background:transparent; border:1px solid rgba(27,42,32,.22); color:#1B2A20; padding:10px; font-size:10px; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; min-height:40px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">{{ p.toggleLabel }}</button>
+                      <button type="button" style="width:44px; background:transparent; border:1px solid rgba(27,42,32,.22); color:#8A9A8C; font-size:14px; cursor:pointer; min-height:40px;" style-hover="border-color:#9A7B3E; color:#9A7B3E;">✕</button>
+                    </div>
+                  </article>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atReportes }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:16px;">
+              <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;">
+                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                  <sc-for list="{{ periods }}" as="pd" hint-placeholder-count="4">
+                    <button type="button" onClick="{{ pd.pick }}" style="background:{{ pd.bg }}; color:{{ pd.color }}; border:1px solid {{ pd.border }}; padding:11px 16px; font-size:12px; letter-spacing:.08em; cursor:pointer; min-height:44px;">{{ pd.label }}</button>
+                  </sc-for>
+                </div>
+                <div style="display:flex; gap:8px;">
+                  <button type="button" style="background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:12px 18px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; cursor:pointer; min-height:44px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Exportar PDF</button>
+                  <button type="button" style="background:transparent; border:1px solid rgba(27,42,32,.25); color:#1B2A20; padding:12px 18px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; cursor:pointer; min-height:44px;" style-hover="border-color:#C9A55C; color:#9A7B3E;">Exportar Excel</button>
+                </div>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px;">
+                <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:20px;">
+                  <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:24px; color:#1B2A20;">Ingresos por periodo</h2>
+                  <div style="display:flex; align-items:stretch; gap:10px; height:200px;">
+                    <sc-for list="{{ salesBars }}" as="b" hint-placeholder-count="8">
+                      <div style="flex:1; display:grid; grid-template-rows:minmax(0,1fr) auto; justify-items:center; gap:8px; height:100%; min-height:0;">
+                        <div style="width:100%; align-self:end; height:{{ b.h }}; background:{{ b.fill }};"></div>
+                        <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8A9A8C;">{{ b.mes }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:18px; align-content:start;">
+                  <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:24px; color:#1B2A20;">Eventos por tipo</h2>
+                  <sc-for list="{{ eventMix }}" as="m" hint-placeholder-count="5">
+                    <div style="display:grid; gap:8px;">
+                      <div style="display:flex; justify-content:space-between; font-size:14px; color:#1B2A20;"><span>{{ m.label }}</span><span style="color:#9A7B3E;">{{ m.n }}</span></div>
+                      <div style="height:6px; background:rgba(27,42,32,.1);"><div style="height:6px; width:{{ m.w }}; background:#C9A55C;"></div></div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:16px; align-content:start;">
+                  <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:24px; color:#1B2A20;">Más vendidos</h2>
+                  <sc-for list="{{ topProducts }}" as="t" hint-placeholder-count="5">
+                    <div style="display:flex; justify-content:space-between; gap:12px; padding:12px 0; border-top:1px solid rgba(27,42,32,.1); font-size:15px; color:#1B2A20;">
+                      <span>{{ t.nombre }}</span>
+                      <span style="color:#9A7B3E;">{{ t.n }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="background:#16241B; padding:26px; display:grid; gap:16px; align-content:start;">
+                  <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:24px; color:#FAF6EE;">Clientes</h2>
+                  <div style="display:flex; justify-content:space-between; font-size:15px; color:rgba(250,246,238,.72);"><span>Nuevos en el periodo</span><span style="color:#C9A55C;">14</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:15px; color:rgba(250,246,238,.72);"><span>Recurrentes</span><span style="color:#C9A55C;">6</span></div>
+                  <div style="display:flex; justify-content:space-between; font-size:15px; color:rgba(250,246,238,.72);"><span>Tasa de cierre</span><span style="color:#C9A55C;">38%</span></div>
+                  <span style="font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(250,246,238,.35);">Datos de demostración</span>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atUsuarios }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; gap:16px;">
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;">
+                <sc-for list="{{ roles }}" as="r" hint-placeholder-count="4">
+                  <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:24px; display:grid; gap:14px; align-content:start;">
+                    <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#9A7B3E;">{{ r.rol }}</span>
+                    <span style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#1B2A20;">{{ r.nombre }}</span>
+                    <span style="font-size:14px; color:#6B7A6C;">{{ r.correo }}</span>
+                    <div style="display:flex; flex-wrap:wrap; gap:7px;">
+                      <sc-for list="{{ r.permisos }}" as="pm" hint-placeholder-count="3">
+                        <span style="border:1px solid rgba(27,42,32,.2); padding:7px 11px; font-size:11px; letter-spacing:.08em; color:#4A5A4E;">{{ pm }}</span>
+                      </sc-for>
+                    </div>
+                    <span style="justify-self:start; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{ r.color }}; border:1px solid {{ r.color }}; padding:7px 12px;">{{ r.estado }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <button type="button" style="justify-self:start; background:#16241B; color:#FAF6EE; border:none; padding:14px 24px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; cursor:pointer; min-height:46px;" style-hover="background:#C9A55C; color:#16241B;">Invitar usuario</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ atConfig }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; align-items:start;">
+              <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:18px; align-content:start;">
+                <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:24px; color:#1B2A20;">Datos de la finca</h2>
+                <div style="display:grid; gap:14px; font-size:15px; color:#4A5A4E;">
+                  <div style="display:flex; justify-content:space-between; gap:12px;"><span>Nombre</span><span style="color:#1B2A20;">Finca La Fortaleza</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:12px;"><span>Ubicación</span><span style="color:#1B2A20; text-align:right;">Santa María Cuevas, Zumpango</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:12px;"><span>Teléfono</span><span style="color:#8A9A8C;">Por confirmar</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:12px;"><span>Correo</span><span style="color:#8A9A8C;">Por confirmar</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:12px;"><span>WhatsApp</span><span style="color:#8A9A8C;">Por confirmar</span></div>
+                </div>
+              </div>
+              <div style="background:#FFFFFF; border:1px solid rgba(27,42,32,.1); padding:26px; display:grid; gap:18px; align-content:start;">
+                <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-weight:400; font-size:24px; color:#1B2A20;">Cotizaciones</h2>
+                <div style="display:grid; gap:14px; font-size:15px; color:#4A5A4E;">
+                  <div style="display:flex; justify-content:space-between; gap:12px;"><span>Prefijo de folio</span><span style="color:#1B2A20;">FT-2026-</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:12px;"><span>Anticipo sugerido</span><span style="color:#1B2A20;">50%</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:12px;"><span>Vigencia</span><span style="color:#1B2A20;">15 días</span></div>
+                  <div style="display:flex; justify-content:space-between; gap:12px;"><span>Moneda</span><span style="color:#1B2A20;">MXN</span></div>
+                </div>
+                <span style="font-size:12px; letter-spacing:.1em; color:#8A9A8C;">Valores de demostración, editables al implementar el sistema.</span>
+              </div>
+            </div>
+          </sc-if>
+
+        </main>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C9A55C&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#C9A55C&quot;,&quot;#B08A4A&quot;,&quot;#E9DCC0&quot;],&quot;section&quot;:&quot;Estilo&quot;}}">
+const IMG = {
+  salon: 'uploads/pasted-1787632614590-0.png',
+  lounge: 'uploads/pasted-1787633831342-0.png',
+  mesa: 'uploads/pasted-1787633793084-0.png',
+  vajilla: 'uploads/pasted-1787633837336-0.png',
+  carpa: 'uploads/pasted-1787633828036-0.png',
+  banquete: 'uploads/pasted-1787633813311-0.png',
+  mariachi: 'uploads/pasted-1787633809998-0.png',
+  foto: 'uploads/pasted-1787633877535-0.png',
+  pista: 'uploads/pasted-1787633854380-0.png',
+  novios: 'uploads/pasted-1787633729628-0.png',
+  xv: 'uploads/pasted-1787633787251-0.png',
+  capilla: 'uploads/pasted-1787633857167-0.png',
+  ventanal: 'uploads/pasted-1787632655759-0.png',
+  jardin: 'uploads/pasted-1787632647988-0.png'
+};
+
+const PRODUCTS = [
+  { id:'p1', cat:'Mobiliario', nombre:'Silla Tiffany', desc:'Silla de resina con cojín, montaje incluido.', precio:85, porInvitado:true, img:IMG.salon },
+  { id:'p2', cat:'Mobiliario', nombre:'Mesa redonda 10 pax', desc:'Mesa para diez personas con base reforzada.', precio:210, img:IMG.mesa },
+  { id:'p3', cat:'Mobiliario', nombre:'Sala lounge', desc:'Sillones, mesa de centro y tapete.', precio:1850, img:IMG.lounge },
+  { id:'p4', cat:'Mobiliario', nombre:'Banco de madera', desc:'Banca rústica para ceremonia al aire libre.', precio:120, img:IMG.jardin },
+  { id:'p5', cat:'Mantelería', nombre:'Mantel beige', desc:'Mantel largo en tela lisa, varios tonos.', precio:95, img:IMG.mesa },
+  { id:'p6', cat:'Mantelería', nombre:'Camino de mesa', desc:'Runner en lino o tul, colores a elegir.', precio:60, img:IMG.vajilla },
+  { id:'p7', cat:'Mantelería', nombre:'Servilleta de tela', desc:'Servilleta con doblez y anillo.', precio:18, porInvitado:true, img:IMG.vajilla },
+  { id:'p8', cat:'Vajilla', nombre:'Vajilla completa', desc:'Plato base, plato fuerte y postre.', precio:75, porInvitado:true, img:IMG.vajilla },
+  { id:'p9', cat:'Vajilla', nombre:'Cubertería', desc:'Juego de cubiertos por comensal.', precio:55, porInvitado:true, img:IMG.banquete },
+  { id:'p10', cat:'Vajilla', nombre:'Copa de vino', desc:'Copa de cristal por comensal.', precio:22, porInvitado:true, img:IMG.vajilla },
+  { id:'p11', cat:'Vajilla', nombre:'Cristalería completa', desc:'Copa de agua, vino y flauta.', precio:30, porInvitado:true, disp:'Bajo pedido', img:IMG.mesa },
+  { id:'p12', cat:'Decoración', nombre:'Decoración básica', desc:'Montaje de mesas, telas y velas.', precio:12000, img:IMG.mesa },
+  { id:'p13', cat:'Decoración', nombre:'Decoración premium', desc:'Diseño floral completo y ambientación.', precio:28000, img:IMG.carpa },
+  { id:'p14', cat:'Decoración', nombre:'Arreglo floral', desc:'Arreglo de temporada por pieza.', precio:850, img:IMG.jardin },
+  { id:'p15', cat:'Decoración', nombre:'Centro de mesa', desc:'Centro floral o de velas por mesa.', precio:1200, img:IMG.mesa },
+  { id:'p16', cat:'Decoración', nombre:'Iluminación', desc:'Series cálidas, spots y ambiental.', precio:9500, img:IMG.carpa },
+  { id:'p17', cat:'Gastronomía', nombre:'Menú tradicional', desc:'Entrada, plato fuerte y postre.', precio:420, porInvitado:true, img:IMG.banquete },
+  { id:'p18', cat:'Gastronomía', nombre:'Menú internacional', desc:'Tres tiempos con opciones a elegir.', precio:540, porInvitado:true, img:IMG.banquete },
+  { id:'p19', cat:'Gastronomía', nombre:'Menú de autor', desc:'Propuesta del chef, degustación previa.', precio:690, porInvitado:true, disp:'Bajo pedido', img:IMG.banquete },
+  { id:'p20', cat:'Gastronomía', nombre:'Barra de bebidas', desc:'Refrescos, hielo y mezcladores.', precio:180, porInvitado:true, img:IMG.mesa },
+  { id:'p21', cat:'Dulces', nombre:'Mesa de dulces básica', desc:'Dulces tradicionales y montaje.', precio:8500, img:IMG.mesa },
+  { id:'p22', cat:'Dulces', nombre:'Mesa de dulces premium', desc:'Repostería, chocolates y postres.', precio:16000, img:IMG.vajilla },
+  { id:'p23', cat:'Dulces', nombre:'Mesa de quesos', desc:'Selección de quesos, fruta y pan.', precio:11000, img:IMG.banquete },
+  { id:'p24', cat:'Servicios', nombre:'DJ y sonido', desc:'Equipo, cabina e iluminación de pista.', precio:12000, img:IMG.pista },
+  { id:'p25', cat:'Servicios', nombre:'Mariachi', desc:'Set de una hora dentro de la finca.', precio:9000, img:IMG.mariachi },
+  { id:'p26', cat:'Servicios', nombre:'Fotografía', desc:'Cobertura de ceremonia y fiesta.', precio:18000, img:IMG.foto },
+  { id:'p27', cat:'Servicios', nombre:'Video', desc:'Video del evento y clip corto.', precio:16000, img:IMG.novios },
+  { id:'p28', cat:'Servicios', nombre:'Pastel', desc:'Pastel de tres pisos, sabor a elegir.', precio:4500, img:IMG.xv },
+  { id:'p29', cat:'Servicios', nombre:'Personal de servicio', desc:'Meseros y apoyo por persona.', precio:650, img:IMG.salon }
+];
+
+const NAV = [
+  ['dashboard','Inicio'], ['cotizaciones','Cotizaciones'], ['eventos','Eventos'], ['clientes','Clientes'],
+  ['catalogo','Catálogo'], ['pagos','Pagos'], ['tickets','Tickets'], ['reportes','Reportes'],
+  ['usuarios','Usuarios'], ['config','Configuración']
+];
+
+const TITLES = {
+  dashboard:['Panel general','Inicio'], cotizaciones:['Cotizaciones','Ventas'], cotizador:['Cotizador','Ventas'],
+  pago:['Registrar pago','Finanzas'], ticket:['Comprobante','Finanzas'], tickets:['Historial de tickets','Finanzas'],
+  eventos:['Eventos','Operación'], clientes:['Clientes','Ventas'], cliente:['Detalle de cliente','Ventas'],
+  pagos:['Pagos','Finanzas'], catalogo:['Catálogo','Administración'], reportes:['Reportes','Administración'],
+  usuarios:['Usuarios y permisos','Administración'], config:['Configuración','Administración']
+};
+
+const CLIENTS = [
+  { nombre:'María López', tel:'55 1234 5678', correo:'maria@correo.com', eventos:2, ultima:'FT-2026-0001', total:'$168,400', estado:'Activo' },
+  { nombre:'Juan Ramírez', tel:'55 8765 4321', correo:'juan@correo.com', eventos:1, ultima:'FT-2026-0004', total:'$85,000', estado:'Anticipo' },
+  { nombre:'Familia Castañeda', tel:'55 5566 7788', correo:'castaneda@correo.com', eventos:3, ultima:'FT-2026-0007', total:'$254,900', estado:'Recurrente' },
+  { nombre:'Grupo Ánfora', tel:'55 2233 4455', correo:'eventos@anfora.mx', eventos:1, ultima:'FT-2026-0009', total:'$62,300', estado:'Prospecto' },
+  { nombre:'Ana y Diego', tel:'55 9988 7766', correo:'anaydiego@correo.com', eventos:1, ultima:'FT-2026-0011', total:'$132,750', estado:'Activo' }
+];
+
+const fmt = (n) => '$' + Math.round(n).toLocaleString('es-MX');
+
+class Component extends DCLogic {
+  state = {
+    screen: 'login', step: 1, cart: { p1: 150, p17: 150, p13: 1, p21: 1 },
+    cat: 'Mobiliario', desc: 5, mobile: false, sidebar: false, notif: false,
+    tipo: 'Boda', invitados: 150, espacio: 'Salón principal', cliente: 'María López',
+    metodo: 'Transferencia', periodo: 'Mes', convertido: false, off: {}
+  };
+
+  componentDidMount() {
+    this.onResize = () => {
+      const m = window.innerWidth < 1024;
+      if (m !== this.state.mobile) this.setState({ mobile: m, sidebar: false });
+    };
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+
+  go(screen, extra) {
+    this.setState(Object.assign({ screen, sidebar: false, notif: false }, extra || {}));
+    if (typeof window !== 'undefined') window.scrollTo(0, 0);
+  }
+  bump(id, d) {
+    this.setState(s => {
+      const cart = Object.assign({}, s.cart);
+      const q = (cart[id] || 0) + d;
+      if (q <= 0) delete cart[id]; else cart[id] = q;
+      return { cart };
+    });
+  }
+
+  lines() {
+    return Object.keys(this.state.cart).map(id => {
+      const p = PRODUCTS.find(x => x.id === id);
+      const qty = this.state.cart[id];
+      return { p, qty, total: p.precio * qty };
+    });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const lines = this.lines();
+    const subtotal = lines.reduce((a, l) => a + l.total, 0);
+    const descAmt = subtotal * s.desc / 100;
+    const total = subtotal - descAmt;
+    const anticipo = total / 2;
+    const gold = '#C9A55C';
+    const pill = (on) => ({
+      bg: on ? '#16241B' : 'transparent',
+      color: on ? '#FAF6EE' : '#4A5A4E',
+      border: on ? '#16241B' : 'rgba(27,42,32,.22)'
+    });
+    const options = (list, cur, key) => list.map(label => Object.assign(
+      { label, pick: () => this.setState({ [key]: label }) }, pill(label === cur)
+    ));
+
+    const cats = ['Mobiliario','Mantelería','Vajilla','Decoración','Gastronomía','Dulces','Servicios'];
+    const visible = PRODUCTS.filter(p => p.cat === s.cat).map(p => {
+      const off = !!s.off[p.id];
+      const disp = off ? 'Inactivo' : (p.disp || 'Disponible');
+      return {
+        id: p.id, cat: p.cat, nombre: p.nombre, desc: p.desc, img: p.img,
+        bg: 'url(' + p.img + ')',
+        precioTxt: fmt(p.precio) + (p.porInvitado ? ' por invitado' : ' por unidad'),
+        qty: s.cart[p.id] || 0,
+        disp, dispColor: off ? '#8A9A8C' : (p.disp ? '#9A7B3E' : gold),
+        cardBorder: s.cart[p.id] ? 'rgba(201,165,92,.75)' : 'rgba(27,42,32,.1)',
+        toggleLabel: off ? 'Activar' : 'Desactivar',
+        toggle: () => this.setState(st => ({ off: Object.assign({}, st.off, { [p.id]: !st.off[p.id] }) })),
+        inc: () => this.bump(p.id, 1),
+        dec: () => this.bump(p.id, -1),
+        fill: () => this.setState(st => ({ cart: Object.assign({}, st.cart, { [p.id]: st.invitados }) }))
+      };
+    });
+
+    const sales = [['Ene',380],['Feb',420],['Mar',610],['Abr',540],['May',720],['Jun',680],['Jul',760],['Ago',845]];
+    const maxSale = 900;
+    const salesBars = sales.map(([mes, v], i) => ({
+      mes, short: '$' + v + 'k', h: Math.round(v / maxSale * 100) + '%',
+      fill: i === sales.length - 1 ? gold : 'rgba(27,42,32,.72)'
+    }));
+
+    const events = [
+      { titulo:'Boda — María & Juan', fecha:'15 septiembre 2026', invitados:150, monto:'$85,000', estado:'Confirmado', estadoColor:'#9A7B3E', img:IMG.novios, bg:'url(uploads/'+IMG.novios.split('/').pop()+')' },
+      { titulo:'XV años — Renata', fecha:'26 septiembre 2026', invitados:120, monto:'$62,000', estado:'En preparación', estadoColor:'#16241B', img:IMG.xv, bg:'url(uploads/'+IMG.xv.split('/').pop()+')' },
+      { titulo:'Empresarial — Grupo Ánfora', fecha:'3 octubre 2026', invitados:80, monto:'$48,500', estado:'Pendiente', estadoColor:'#8A9A8C', img:IMG.lounge, bg:'url(uploads/'+IMG.lounge.split('/').pop()+')' },
+      { titulo:'Boda — Ana & Diego', fecha:'17 octubre 2026', invitados:180, monto:'$132,750', estado:'Cotización', estadoColor:'#8A9A8C', img:IMG.capilla, bg:'url(uploads/'+IMG.capilla.split('/').pop()+')' }
+    ];
+
+    const calEvents = { 5:'Familiar · 60 pax', 12:'Boda · 140 pax', 15:'Boda M&J · 150 pax', 19:'Empresarial · 80 pax', 26:'XV Renata · 120 pax' };
+    const calendar = [];
+    for (let i = 0; i < 35; i++) {
+      const num = i - 1;
+      const inMonth = num >= 1 && num <= 30;
+      const ev = inMonth ? (calEvents[num] || '') : '';
+      calendar.push({
+        num: inMonth ? String(num) : '',
+        ev,
+        bg: ev ? '#EFE7D7' : '#FFFFFF',
+        numColor: inMonth ? '#1B2A20' : 'rgba(27,42,32,.2)',
+        evColor: '#9A7B3E'
+      });
+    }
+
+    const clientSel = CLIENTS[0];
+    const [title, crumb] = TITLES[s.screen] || ['', ''];
+
+    return {
+      isLogin: s.screen === 'login',
+      isApp: s.screen !== 'login',
+      loginCols: s.mobile ? '1fr' : '1.15fr 1fr',
+      loginArtDisplay: s.mobile ? 'none' : 'block',
+      doLogin: (e) => { e.preventDefault(); this.go('dashboard'); },
+      logout: () => this.go('login'),
+
+      shellCols: s.mobile ? '1fr' : '264px 1fr',
+      sidebarWidth: s.mobile ? 'min(300px,86vw)' : 'auto',
+      sidebarDisplay: (!s.mobile || s.sidebar) ? 'grid' : 'none',
+      sidebarPos: s.mobile ? 'fixed' : 'sticky',
+      sidebarInset: s.mobile ? '0 auto 0 0' : '0 auto auto auto',
+      sidebarCloseDisplay: s.mobile ? 'block' : 'none',
+      burgerDisplay: s.mobile ? 'flex' : 'none',
+      userMetaDisplay: s.mobile ? 'none' : 'flex',
+      newQuoteDisplay: s.mobile ? 'none' : 'inline-flex',
+      openSidebar: () => this.setState({ sidebar: true }),
+      closeSidebar: () => this.setState({ sidebar: false }),
+      toggleNotif: () => this.setState(st => ({ notif: !st.notif })),
+      notifDisplay: s.notif ? 'grid' : 'none',
+
+      screenTitle: title, crumb,
+      navItems: NAV.map(([id, label]) => {
+        const on = s.screen === id || (id === 'cotizaciones' && (s.screen === 'cotizador' || s.screen === 'pago')) || (id === 'clientes' && s.screen === 'cliente') || (id === 'tickets' && s.screen === 'ticket');
+        return {
+          label, go: () => this.go(id),
+          bg: on ? 'rgba(201,165,92,.12)' : 'transparent',
+          color: on ? '#FAF6EE' : 'rgba(250,246,238,.66)',
+          mark: on ? gold : 'transparent',
+          dot: on ? gold : 'rgba(250,246,238,.25)'
+        };
+      }),
+
+      atDashboard: s.screen === 'dashboard',
+      atCotizaciones: s.screen === 'cotizaciones',
+      atCotizador: s.screen === 'cotizador',
+      atPago: s.screen === 'pago',
+      atTicket: s.screen === 'ticket',
+      atTickets: s.screen === 'tickets',
+      atEventos: s.screen === 'eventos',
+      atClientes: s.screen === 'clientes',
+      atCliente: s.screen === 'cliente',
+      atPagos: s.screen === 'pagos',
+      atCatalogo: s.screen === 'catalogo',
+      atReportes: s.screen === 'reportes',
+      atUsuarios: s.screen === 'usuarios',
+      atConfig: s.screen === 'config',
+
+      goCotizador: () => this.go('cotizador', { step: 1 }),
+      goEventos: () => this.go('eventos'),
+      goClientes: () => this.go('clientes'),
+      goTickets: () => this.go('tickets'),
+      goPagoFlow: () => this.go('pago'),
+      goTicket: () => this.go('ticket'),
+      convertirEvento: () => this.setState({ convertido: true }),
+      convertidoDisplay: s.convertido ? 'grid' : 'none',
+
+      kpis: [
+        { label:'Ventas del mes', value:'$845,000', note:'Demo · +12% vs julio' },
+        { label:'Cotizaciones', value:'18', note:'7 enviadas esta semana' },
+        { label:'Eventos próximos', value:'6', note:'Siguientes 60 días' },
+        { label:'Pagos pendientes', value:'$196,500', note:'4 saldos por cobrar' },
+        { label:'Reservaciones', value:'9', note:'Villas para hospedaje' },
+        { label:'Clientes nuevos', value:'14', note:'En agosto' }
+      ],
+      salesBars,
+      quoteStats: [
+        { label:'Nuevas', n:6, w:'40%', fill:'#8A9A8C' },
+        { label:'Enviadas', n:7, w:'55%', fill:'rgba(27,42,32,.72)' },
+        { label:'Aprobadas', n:4, w:'32%', fill:gold },
+        { label:'Rechazadas', n:1, w:'10%', fill:'rgba(27,42,32,.28)' }
+      ],
+      upcoming: events,
+      eventCards: events,
+      weekDays: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+      calendar,
+
+      quoteFilters: ['Todas','Nuevas','Enviadas','Aprobadas','Este mes'],
+      quotes: [
+        { folio:'FT-2026-0001', cliente:'María López', evento:'Boda', fecha:'15/09/2026', total:'$85,000', estado:'Aprobada', color:'#9A7B3E' },
+        { folio:'FT-2026-0004', cliente:'Juan Ramírez', evento:'Boda', fecha:'15/09/2026', total:'$85,000', estado:'Enviada', color:'#4A5A4E' },
+        { folio:'FT-2026-0007', cliente:'Familia Castañeda', evento:'Familiar', fecha:'05/09/2026', total:'$41,200', estado:'Aprobada', color:'#9A7B3E' },
+        { folio:'FT-2026-0009', cliente:'Grupo Ánfora', evento:'Empresarial', fecha:'03/10/2026', total:'$48,500', estado:'Nueva', color:'#8A9A8C' },
+        { folio:'FT-2026-0011', cliente:'Ana y Diego', evento:'Boda', fecha:'17/10/2026', total:'$132,750', estado:'Enviada', color:'#4A5A4E' },
+        { folio:'FT-2026-0012', cliente:'Renata Ibarra', evento:'XV años', fecha:'26/09/2026', total:'$62,000', estado:'Aprobada', color:'#9A7B3E' }
+      ].map(q => Object.assign(q, { open: () => this.go('cotizador', { step: 3 }) })),
+
+      steps: [
+        { n:'01', label:'Cliente y evento', go: () => this.setState({ step: 1 }) },
+        { n:'02', label:'Productos y servicios', go: () => this.setState({ step: 2 }) },
+        { n:'03', label:'Cotización', go: () => this.setState({ step: 3 }) }
+      ].map((st, i) => Object.assign(st, pill(s.step === i + 1))),
+      step1: s.step === 1, step2: s.step === 2, step3: s.step === 3,
+      toStep2: () => this.setState({ step: 2 }),
+      toStep3: () => this.setState({ step: 3 }),
+      builderCols: s.mobile ? '1fr' : 'minmax(0,1fr) 340px',
+
+      cliente: s.cliente,
+      setCliente: (e) => this.setState({ cliente: e.target.value }),
+      invitados: s.invitados,
+      setInvitados: (e) => this.setState({ invitados: Number(e.target.value) || 0 }),
+      tipoEvento: s.tipo,
+      espacio: s.espacio,
+      eventTypes: options(['Boda','XV años','Cumpleaños','Empresarial','Familiar','Otro'], s.tipo, 'tipo'),
+      spaces: options(['Salón principal','Jardines','Capilla','Carpa','Terraza'], s.espacio, 'espacio'),
+      categories: cats.map(label => Object.assign({ label, pick: () => this.setState({ cat: label }) }, pill(label === s.cat))),
+      visibleProducts: visible,
+
+      cartLines: lines.map(l => ({
+        nombre: l.p.nombre, qty: l.qty,
+        precioTxt: fmt(l.p.precio), totalTxt: fmt(l.total),
+        detalle: l.qty + ' × ' + fmt(l.p.precio)
+      })),
+      cartEmpty: lines.length === 0,
+      subtotalTxt: fmt(subtotal),
+      descPct: s.desc,
+      descTxt: '−' + fmt(descAmt),
+      totalTxt: fmt(total),
+      anticipoTxt: fmt(anticipo),
+      saldoTxt: fmt(total - anticipo),
+      descPlus: () => this.setState(st => ({ desc: Math.min(30, st.desc + 5) })),
+      descMinus: () => this.setState(st => ({ desc: Math.max(0, st.desc - 5) })),
+
+      methods: options(['Efectivo','Transferencia','Tarjeta','Otro'], s.metodo, 'metodo'),
+      metodo: s.metodo,
+      flowSteps: ['Cliente','Cotización','Servicios','Total','Pago','Ticket','Evento'].map((label, i) => ({
+        n: i + 1, label,
+        color: i < 5 ? gold : 'rgba(250,246,238,.35)',
+        text: i < 5 ? '#FAF6EE' : 'rgba(250,246,238,.55)'
+      })),
+
+      ticketFilters: ['Todos','Este mes','Transferencia','Anticipos','Liquidados'],
+      tickets: [
+        { folio:'TK-2026-0001', cliente:'María López', evento:'Boda', fecha:'25/08/2026', monto:'$42,500', metodo:'Transferencia', estado:'Anticipo', color:'#9A7B3E' },
+        { folio:'TK-2026-0002', cliente:'Renata Ibarra', evento:'XV años', fecha:'22/08/2026', monto:'$31,000', metodo:'Tarjeta', estado:'Anticipo', color:'#9A7B3E' },
+        { folio:'TK-2026-0003', cliente:'Familia Castañeda', evento:'Familiar', fecha:'18/08/2026', monto:'$41,200', metodo:'Efectivo', estado:'Liquidado', color:'#16241B' },
+        { folio:'TK-2026-0004', cliente:'Grupo Ánfora', evento:'Empresarial', fecha:'14/08/2026', monto:'$24,250', metodo:'Transferencia', estado:'Anticipo', color:'#9A7B3E' },
+        { folio:'TK-2026-0005', cliente:'Ana y Diego', evento:'Boda', fecha:'09/08/2026', monto:'$66,375', metodo:'Transferencia', estado:'Anticipo', color:'#9A7B3E' },
+        { folio:'TK-2026-0006', cliente:'Juan Ramírez', evento:'Boda', fecha:'02/08/2026', monto:'$85,000', metodo:'Transferencia', estado:'Liquidado', color:'#16241B' }
+      ],
+
+      payKpis: [
+        { label:'Ingresos del mes', value:'$845,000', note:'Demo' },
+        { label:'Anticipos', value:'$390,400', note:'6 eventos' },
+        { label:'Saldos pendientes', value:'$196,500', note:'4 por cobrar' },
+        { label:'Pagos hoy', value:'$42,500', note:'1 movimiento' }
+      ],
+      payments: [
+        { fecha:'25/08/2026', cliente:'María López', evento:'Boda', monto:'$42,500', metodo:'Transferencia', estado:'Anticipo', color:'#9A7B3E' },
+        { fecha:'22/08/2026', cliente:'Renata Ibarra', evento:'XV años', monto:'$31,000', metodo:'Tarjeta', estado:'Anticipo', color:'#9A7B3E' },
+        { fecha:'18/08/2026', cliente:'Familia Castañeda', evento:'Familiar', monto:'$41,200', metodo:'Efectivo', estado:'Liquidado', color:'#16241B' },
+        { fecha:'14/08/2026', cliente:'Grupo Ánfora', evento:'Empresarial', monto:'$24,250', metodo:'Transferencia', estado:'Anticipo', color:'#9A7B3E' },
+        { fecha:'09/08/2026', cliente:'Ana y Diego', evento:'Boda', monto:'$66,375', metodo:'Transferencia', estado:'Anticipo', color:'#9A7B3E' },
+        { fecha:'02/08/2026', cliente:'Juan Ramírez', evento:'Boda', monto:'$85,000', metodo:'Transferencia', estado:'Liquidado', color:'#16241B' }
+      ],
+
+      clients: CLIENTS.map(c => Object.assign({}, c, {
+        color: c.estado === 'Recurrente' ? '#9A7B3E' : (c.estado === 'Prospecto' ? '#8A9A8C' : '#16241B'),
+        open: () => this.go('cliente')
+      })),
+      clienteSel: clientSel,
+      clientHistory: [
+        { tipo:'Cotización FT-2026-0001', monto:'$85,000', detalle:'Boda · 15/09/2026 · 150 invitados' },
+        { tipo:'Anticipo TK-2026-0001', monto:'$42,500', detalle:'Transferencia · 25/08/2026' },
+        { tipo:'Evento confirmado', monto:'$85,000', detalle:'Salón principal y jardines' },
+        { tipo:'Reservación de villas', monto:'$18,400', detalle:'Hospedaje para familiares' },
+        { tipo:'Cotización FT-2025-0088', monto:'$41,200', detalle:'Celebración familiar · 2025' }
+      ],
+
+      periods: options(['Día','Semana','Mes','Año'], s.periodo, 'periodo'),
+      eventMix: [
+        { label:'Bodas', n:12, w:'80%' }, { label:'XV años', n:6, w:'45%' },
+        { label:'Empresariales', n:4, w:'30%' }, { label:'Familiares', n:5, w:'36%' },
+        { label:'Otros', n:2, w:'16%' }
+      ],
+      topProducts: [
+        { nombre:'Menú tradicional', n:'1,840 servicios' },
+        { nombre:'Silla Tiffany', n:'2,260 piezas' },
+        { nombre:'Decoración premium', n:'9 eventos' },
+        { nombre:'DJ y sonido', n:'11 eventos' },
+        { nombre:'Mesa de dulces premium', n:'7 eventos' }
+      ],
+
+      roles: [
+        { nombre:'Daniela Mendoza', rol:'Administrador', correo:'daniela@fincalafortaleza.mx', permisos:['Acceso completo','Usuarios','Configuración'], estado:'Activo', color:'#9A7B3E' },
+        { nombre:'Carlos Rivas', rol:'Ventas', correo:'carlos@fincalafortaleza.mx', permisos:['Clientes','Cotizaciones','Eventos'], estado:'Activo', color:'#9A7B3E' },
+        { nombre:'Paola Nieto', rol:'Finanzas', correo:'paola@fincalafortaleza.mx', permisos:['Pagos','Tickets','Reportes'], estado:'Activo', color:'#9A7B3E' },
+        { nombre:'Luis Ortega', rol:'Operación', correo:'luis@fincalafortaleza.mx', permisos:['Eventos','Reservaciones'], estado:'Invitado', color:'#8A9A8C' }
+      ],
+
+      notifications: [
+        { text:'Se recibió una nueva solicitud de cotización.', time:'Hace 12 minutos' },
+        { text:'María López realizó un anticipo de $42,500.', time:'Hoy, 10:04' },
+        { text:'Evento próximo en 7 días: Boda M&J.', time:'Ayer' },
+        { text:'Hay un pago pendiente de $31,500.', time:'22/08/2026' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
